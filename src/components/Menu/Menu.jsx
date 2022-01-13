@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useCallback, useState} from "react";
 import {useDispatch} from "react-redux";
 import Navbar from "./Navbar/Navbar";
 import Sidebar from "./Sidebar/Sidebar";
@@ -13,9 +13,9 @@ const Menu = () => {
         document.body.style.overflow = 'visible'
     }
 
-    const handleLogoutUser = () => {
+    const handleLogoutUser = useCallback(() => {
         dispatch(userLogout())
-    }
+    }, [])
 
     return (
         <>

@@ -1,18 +1,9 @@
-import {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import Modal from "../components/_UI/Modal";
-import {setLoginSuccessMessage} from "../redux/auth/auth.actions";
 import homeImage from '../assets/images/home-header.png'
 
 const Home = () => {
-    const dispatch = useDispatch()
     const {showSuccessMessage} = useSelector(({auth}) => auth)
-
-    useEffect(() => {
-        setTimeout(() => {
-            dispatch(setLoginSuccessMessage(false))
-        }, 2000)
-    }, [])
 
     return (
         <div className='home'>

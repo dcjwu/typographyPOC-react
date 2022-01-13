@@ -1,8 +1,9 @@
+import {memo} from "react";
 import {NavLink} from "react-router-dom";
 import {useSelector} from "react-redux";
 import CategoryList from "./CategoryList";
 
-const SidebarLinks = ({handleClickInside, handleLogoutUser}) => {
+const SidebarLinks = memo(({handleClickInside, handleLogoutUser}) => {
     const {currentUser, isAdmin} = useSelector(({auth}) => auth)
     const toggleNavOnClick = () => handleClickInside()
 
@@ -38,6 +39,6 @@ const SidebarLinks = ({handleClickInside, handleLogoutUser}) => {
             <CategoryList handleClickInside={handleClickInside}/>
         </>
     )
-}
+})
 
 export default SidebarLinks

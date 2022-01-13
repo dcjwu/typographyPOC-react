@@ -19,6 +19,24 @@ const setProducts = products => ({
     payload: products
 })
 
+export const getFilteredProducts = filter => async dispatch => {
+    dispatch(setLoaded(false))
+    await firestore.collection('products').orderBy('title').where('category', '==', filter)
+        .get()
+        .then(products => {
+            let readyData = []
+            products.docs.map(product => {
+                readyData.push(product.data())
+            })
+            dispatch(setFilteredProducts(readyData))
+        })
+}
+
+const setFilteredProducts = products => ({
+    type: productsTypes.FILTER_PRODUCTS,
+    payload: products
+})
+
 export const getProductById = id => async dispatch => {
     dispatch(setLoaded(false))
     await firestore.collection('products').where('id', '==', id)

@@ -12,6 +12,9 @@ export const userAuth = (email, password) => async dispatch => {
                 .then(snap => {
                     if (!snap.data().userRoles.includes('admin')) return
                     dispatch(setUserAdmin(true))
+                    setTimeout(() => {
+                        dispatch(setLoginSuccessMessage(false))
+                    }, 2000)
                 })
 
         })

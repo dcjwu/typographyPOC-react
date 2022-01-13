@@ -1,11 +1,14 @@
 import {NavLink} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import Logo from "./Logo";
 import Cart from "./Cart";
+import {getProducts} from "../../../redux/products/products.actions";
 import classNames from "classnames";
 
 const Navbar = ({toggleNavHandler, toggleNavStatus, handleLogoutUser}) => {
+    const dispatch = useDispatch()
     const {currentUser, isAdmin} = useSelector(({auth}) => auth)
+    const handleShop = () => dispatch(getProducts())
 
     return (
         <div className='navbar bg-light navbar--custom'>
@@ -20,7 +23,7 @@ const Navbar = ({toggleNavHandler, toggleNavStatus, handleLogoutUser}) => {
                     <span/>
                 </div>
                 <Logo/>
-                <NavLink className='link shop-link' to='/shop'>
+                <NavLink onClick={handleShop} className='link shop-link' to='/shop'>
                     Shop
                 </NavLink>
                 {

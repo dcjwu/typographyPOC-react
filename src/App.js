@@ -15,6 +15,7 @@ import AdminRoute from "./components/_routes/AdminRoute";
 const App = () => {
     const dispatch = useDispatch()
     const {currentUser, isAdmin} = useSelector(({auth}) => auth)
+
     useEffect(() => {
         dispatch(checkCurrentUser())
     }, [])

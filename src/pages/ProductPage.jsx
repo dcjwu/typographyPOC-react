@@ -11,13 +11,10 @@ const ProductPage = () => {
 
     useEffect(() => {
         dispatch(getProductById(+id))
-
         return () => {
             dispatch(clearProductById())
         }
     }, [id])
-
-    console.log(productById.calculator)
 
     return (
         <div className='product'>

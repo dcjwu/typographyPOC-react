@@ -1,10 +1,10 @@
 import {useEffect, useState} from "react";
 import {useHistory} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {userAuth} from "../redux/auth/auth.actions";
 import Input from "../components/_UI/Input";
 import Button from "../components/_UI/Button";
 import Spinner from "../components/_UI/Spinner";
+import {userAuth} from "../redux/auth/auth.actions";
 
 const Login = () => {
     const dispatch = useDispatch()
@@ -31,7 +31,6 @@ const Login = () => {
     const handleFormSubmit = async e => {
         e.preventDefault()
         dispatch(userAuth(email, password))
-
         resetForm()
     }
 
