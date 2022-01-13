@@ -10,11 +10,11 @@ export const userAuth = (email, password) => async dispatch => {
             firestore.doc(`users/${uid}`)
                 .get()
                 .then(snap => {
-                    if (!snap.data().userRoles.includes('admin')) return
-                    dispatch(setUserAdmin(true))
                     setTimeout(() => {
                         dispatch(setLoginSuccessMessage(false))
                     }, 2000)
+                    if (!snap.data().userRoles.includes('admin')) return
+                    dispatch(setUserAdmin(true))
                 })
 
         })
