@@ -1,0 +1,16 @@
+@import "../vendor/mixins";
+@import "../vendor/vars";
+
+.form {
+  &-custom {
+    margin: 0 auto;
+    padding: 4rem;
+    width: 80%;
+    border-radius: 4rem;
+    background-color: #efefef;
+    @include breakpoint($bp576) {
+      padding: 2rem;
+      width: 100%;
+    }
+  }
+}

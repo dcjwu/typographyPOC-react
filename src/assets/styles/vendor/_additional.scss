@@ -1,0 +1,42 @@
+@import 'mixins';
+@import "vars";
+
+.navbar {
+  height: $navbarHeight;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+}
+
+.btn {
+  position: relative;
+  &-cart {
+    padding: 2rem;
+  }
+  & .fa-shopping-cart {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.btn,
+.form-control {
+  font-size: $mainFZ;
+  @include breakpoint($bp767) {
+    font-size: $mainFZ767;
+  }
+}
+
+.link.active {
+  color: $blue;
+}
+
+.modal-custom {
+  position: absolute;
+  top: $navbarHeight;
+  right: 0;
+  width: 75%;
+  transition: all .2s ease-in-out;
+}

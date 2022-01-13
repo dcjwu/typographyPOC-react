@@ -1,0 +1,52 @@
+@import "vendor/vars";
+@import "vendor/reset";
+@import "vendor/additional";
+@import "./blocks/login";
+@import './blocks/navbar';
+@import "./blocks/sidebar";
+@import "./blocks/cart";
+@import "./blocks/home";
+@import "./blocks/shop";
+@import "blocks/product";
+
+.container-content {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 2.5rem;
+}
+
+.main {
+  padding: $navbarHeight 0 2rem $sideBarWidth;
+  @include breakpoint($bp767) {
+    padding-left: 0;
+  }
+}
+
+.title {
+  margin-top: 2rem;
+  font-size: 4rem;
+  text-align: center;
+  @include breakpoint($bp576) {
+    font-size: 3rem;
+  }
+  &--shop {
+    text-transform: capitalize;
+  }
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+  transition: color .2s ease-in-out;
+  cursor: pointer;
+  &:hover {
+    color: #0a58ca;
+  }
+}
+
+small {
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  display: block;
+  text-align: center;
+}

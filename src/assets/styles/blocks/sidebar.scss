@@ -1,0 +1,46 @@
+@import '../vendor/vars';
+@import "../vendor/mixins";
+
+.sidebar {
+  margin-top: $navbarHeight;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  height: calc(100vh - #{$navbarHeight});
+  width: $sideBarWidth;
+  opacity: .95;
+  @include breakpoint($bp767) {
+    width: 50%;
+    transform: translateX(-100%);
+    transition: transform .2s linear;
+  }
+  @include breakpoint($bp576) {
+    width: 80%;
+  }
+
+  &-list {
+    padding-left: 0;
+    li {
+      text-transform: capitalize;
+    }
+  }
+
+  &.active {
+    transform: translateX(0)
+  }
+}
+
+.nav-toggle-wrapper {
+  margin: 2.5rem 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  @include breakpoint($bp767) {
+    display: flex;
+  }
+
+  & > * {
+    margin: .5rem 0;
+  }
+}
