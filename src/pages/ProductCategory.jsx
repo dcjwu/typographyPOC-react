@@ -1,40 +1,39 @@
-import {Link, useHistory, useRouteMatch} from "react-router-dom";
+import {Link, useParams, useRouteMatch} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import Spinner from "./_UI/Spinner";
 import {useEffect} from "react";
-import {getProducts} from "../redux/products/products.actions";
+import {getFilteredProducts} from "../redux/products/products.actions";
+import Spinner from "../components/_UI/Spinner";
 
-const Products = () => {
+const ProductCategory = () => {
+    const {category} = useParams()
     const {url} = useRouteMatch()
     const dispatch = useDispatch()
-    const {productList, isLoaded} = useSelector(({products}) => products)
+    const {productsByCategory, isLoaded} = useSelector(({products}) => products)
 
     useEffect(() => {
-        if (productList === null) {
-            dispatch(getProducts())
-        }
-    }, [])
+        dispatch(getFilteredProducts(category))
+    }, [category])
 
     return (
-        <>
+        <div className='shop'>
             {
                 !isLoaded
                     ? <Spinner/>
-                    : productList && productList.map(product => (
+                    : productsByCategory && productsByCategory.map(product => (
                         <div className='shop-card-item' key={product.id}>
                             <div className="card">
                                 <img className="card-img-top" src={product.imageUrl} alt="Product"/>
                                 <div className="card-body">
                                     <Link
                                         className="card-text text-center link"
-                                        to={`${url}/${product.category}/${product.id}`}>{product.title}</Link>
+                                        to={`${url}/${product.id}`}>{product.title}</Link>
                                 </div>
                             </div>
                         </div>
                     ))
             }
-        </>
+        </div>
     )
 }
 
-export default Products
+export default ProductCategory

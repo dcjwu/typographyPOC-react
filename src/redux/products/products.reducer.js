@@ -2,8 +2,8 @@ import productsTypes from "./products.types";
 
 const initialState = {
     productList: null,
-    filteredProducts: null,
-    productById: [],
+    productsByCategory: null,
+    productById: {},
     isLoaded: false
 }
 
@@ -13,13 +13,12 @@ const productsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 productList: action.payload,
-                filteredProducts: null,
                 isLoaded: true
             }
-        case productsTypes.FILTER_PRODUCTS:
+        case productsTypes.SET_PRODUCTS_BY_CATEGORY:
             return {
                 ...state,
-                filteredProducts: action.payload,
+                productsByCategory: action.payload,
                 isLoaded: true
             }
         case productsTypes.SET_PRODUCT_BY_ID:

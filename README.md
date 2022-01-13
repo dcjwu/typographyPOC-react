@@ -1,4 +1,4 @@
-# [Demo]() Web App for Typography #
+# [Demo](https://demo-typography-web.herokuapp.com/#/) Web App for Typography #
 #### January 2022 ####
 ---
 ## My first experience using Redux and Firebase. ##

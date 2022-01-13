@@ -32,9 +32,9 @@ export const getFilteredProducts = filter => async dispatch => {
         })
 }
 
-const setFilteredProducts = products => ({
-    type: productsTypes.FILTER_PRODUCTS,
-    payload: products
+const setFilteredProducts = data => ({
+    type: productsTypes.SET_PRODUCTS_BY_CATEGORY,
+    payload: data
 })
 
 export const getProductById = id => async dispatch => {

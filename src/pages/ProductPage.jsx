@@ -1,5 +1,5 @@
 import {useEffect} from "react";
-import {useParams} from "react-router-dom";
+import {useParams, useRouteMatch} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import Spinner from "../components/_UI/Spinner";
 import {clearProductById, getProductById} from "../redux/products/products.actions";

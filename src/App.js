@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Cart from "./pages/Cart";
 import Shop from "./pages/Shop";
 import ProductPage from "./pages/ProductPage";
+import ProductCategory from "./pages/ProductCategory";
 import Admin from "./pages/Admin";
 import PublicRoute from "./components/_routes/PublicRoute";
 import {checkCurrentUser} from "./redux/auth/auth.actions";
@@ -28,7 +29,8 @@ const App = () => {
                     <Route exact path='/' component={Home}/>
                     <PublicRoute exact path='/login' component={Login} auth={currentUser}/>
                     <Route exact path='/shop' component={Shop}/>
-                    <Route path='/shop/:category/:id' component={ProductPage}/>
+                    <Route exact path='/shop/:category' component={ProductCategory}/>
+                    <Route exact path='/shop/:category/:id' component={ProductPage}/>
                     <Route exact path='/cart' component={Cart}/>
                     <AdminRoute exact path='/admin' component={Admin} auth={isAdmin}/>
                     <Route path='*' component={Home}/>
