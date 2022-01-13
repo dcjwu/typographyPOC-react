@@ -1,11 +1,11 @@
 import authTypes from "./auth.types";
 
 const initialState = {
-    isAuth: false,
     showSuccessMessage: false,
     currentUser: null,
     isAdmin: false,
-    setAuthError: ''
+    setAuthError: '',
+    isUserAuthLoaded: false
 }
 
 const authReducer = (state = initialState, action) => {
@@ -16,17 +16,12 @@ const authReducer = (state = initialState, action) => {
                 showSuccessMessage: action.payload,
                 setAuthError: ''
             }
-        case authTypes.IS_USER_AUTH_SUCCESS:
-            return {
-                ...state,
-                isAuth: action.payload,
-                setAuthError: ''
-            }
         case authTypes.CURRENT_USER:
             return {
                 ...state,
                 currentUser: action.payload,
-                setAuthError: ''
+                setAuthError: '',
+                isUserAuthLoaded: true
             }
         case authTypes.IS_USER_ADMIN:
             return {
@@ -40,13 +35,20 @@ const authReducer = (state = initialState, action) => {
                 showSuccessMessage: false,
                 currentUser: null,
                 isAdmin: false,
-                setAuthError: ''
+                setAuthError: '',
+                isUserAuthLoaded: false
             }
         case authTypes.SET_AUTH_ERROR:
             return {
                 ...state,
                 showSuccessMessage: false,
-                setAuthError: action.payload
+                setAuthError: action.payload,
+                isUserAuthLoaded: false
+            }
+        case authTypes.SET_USER_AUTH_LOADED:
+            return {
+                ...state,
+                isUserAuthLoaded: action.payload
             }
         default:
             return state

@@ -2,10 +2,10 @@ import authTypes from "./auth.types";
 import {auth, firestore} from "../../firebase/utils";
 
 export const userAuth = (email, password) => async dispatch => {
+    dispatch(setIsUserAuthLoaded(true))
     await auth.signInWithEmailAndPassword(email, password)
         .then(userCredentials => {
             dispatch(setLoginSuccessMessage(true))
-            dispatch(setUserAuth(!!userCredentials.user))
             const {uid} = userCredentials.user
             firestore.doc(`users/${uid}`)
                 .get()
@@ -19,11 +19,6 @@ export const userAuth = (email, password) => async dispatch => {
             dispatch(setAuthError(error.code))
         })
 }
-
-export const setUserAuth = auth => ({
-    type: authTypes.IS_USER_AUTH_SUCCESS,
-    payload: auth
-})
 
 export const setLoginSuccessMessage = successFlag => ({
     type: authTypes.SHOW_LOGIN_MESSAGE_SUCCESS,
@@ -60,4 +55,9 @@ const setUserAdmin = isAdmin => ({
 const setAuthError = error => ({
     type: authTypes.SET_AUTH_ERROR,
     payload: error
+})
+
+const setIsUserAuthLoaded = isLoaded => ({
+    type: authTypes.SET_USER_AUTH_LOADED,
+    payload: isLoaded
 })
