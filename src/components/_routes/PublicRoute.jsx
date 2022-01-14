@@ -1,15 +1,15 @@
-import {Route, Redirect} from "react-router-dom";
+import {Route, Redirect} from 'react-router-dom'
 
 const PublicRoute = ({component: Component, auth, ...otherProps}) => {
-    return (
-        <Route {...otherProps} render={(props) => (
-            auth === false
-                ? <Component {...props}/>
-                : <Redirect to={'/'}/>
-        )}>
+   return (
+      <Route {...otherProps} render={(props) => (
+         auth === false
+            ? <Component {...props}/>
+            : <Redirect to={'/'}/>
+      )}>
 
-        </Route>
-    )
+      </Route>
+   )
 }
 
 export default PublicRoute

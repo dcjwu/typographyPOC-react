@@ -1,35 +1,35 @@
-import {useRef, useEffect} from "react";
-import SidebarLinks from "./SidebarLinks";
-import classNames from "classnames";
+import {useRef, useEffect} from 'react'
+import SidebarLinks from './SidebarLinks'
+import classNames from 'classnames'
 
 const Sidebar = ({toggleNavStatus, toggleNavHandler, handleLogoutUser}) => {
 
-    const outsideClickRef = useRef()
-    useEffect(() => {
-        const checkIfClickedOutside = event => {
-            if (toggleNavStatus && outsideClickRef.current && !outsideClickRef.current.contains(event.target)) {
-                toggleNavHandler(false)
-            }
-        }
-        document.addEventListener('click', checkIfClickedOutside)
-        return () => {
-            document.removeEventListener('click', checkIfClickedOutside)
-        }
-    }, [toggleNavStatus])
-
-    const handleClickInside = () => {
-        if (toggleNavStatus) {
+   const outsideClickRef = useRef()
+   useEffect(() => {
+      const checkIfClickedOutside = event => {
+         if (toggleNavStatus && outsideClickRef.current && !outsideClickRef.current.contains(event.target)) {
             toggleNavHandler(false)
-        }
-    }
+         }
+      }
+      document.addEventListener('click', checkIfClickedOutside)
+      return () => {
+         document.removeEventListener('click', checkIfClickedOutside)
+      }
+   }, [toggleNavStatus])
 
-    return (
-        <div ref={outsideClickRef} className={classNames('sidebar bg-light text-center p-3', {
-            'active': toggleNavStatus
-        })}>
-            <SidebarLinks handleClickInside={handleClickInside} handleLogoutUser={handleLogoutUser}/>
-        </div>
-    )
+   const handleClickInside = () => {
+      if (toggleNavStatus) {
+         toggleNavHandler(false)
+      }
+   }
+
+   return (
+      <div ref={outsideClickRef} className={classNames('sidebar bg-light text-center p-3', {
+         'active': toggleNavStatus
+      })}>
+         <SidebarLinks handleClickInside={handleClickInside} handleLogoutUser={handleLogoutUser}/>
+      </div>
+   )
 }
 
 export default Sidebar

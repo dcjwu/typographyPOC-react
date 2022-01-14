@@ -1,13 +1,13 @@
-import Products from "../components/Products";
+import Products from '../components/Products'
 
 const Shop = () => {
-    return (
-        <div className='container-content'>
-            <div className="shop">
-                <Products/>
-            </div>
-        </div>
-    )
+   return (
+      <div className="container-content">
+         <div className="shop">
+            <Products/>
+         </div>
+      </div>
+   )
 }
 
 export default Shop
