@@ -21,6 +21,8 @@ const App = () => {
       dispatch(checkCurrentUser())
    }, [])
 
+   console.log('Simple github check.')
+
    return (
       <>
          <Menu/>
