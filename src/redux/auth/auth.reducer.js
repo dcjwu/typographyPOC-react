@@ -2,7 +2,7 @@ import authTypes from "./auth.types";
 
 const initialState = {
     showSuccessMessage: false,
-    currentUser: null,
+    currentUser: false,
     isAdmin: false,
     setAuthError: '',
     isUserAuthLoaded: false
@@ -31,9 +31,8 @@ const authReducer = (state = initialState, action) => {
         case authTypes.SET_USER_LOGOUT:
             return {
                 ...state,
-                isAuth: false,
                 showSuccessMessage: false,
-                currentUser: null,
+                currentUser: false,
                 isAdmin: false,
                 setAuthError: '',
                 isUserAuthLoaded: false

@@ -1,25 +1,28 @@
 import authTypes from "./auth.types";
+import firebase from "firebase/compat/app";
 import {auth, firestore} from "../../firebase/utils";
 
 export const userAuth = (email, password) => async dispatch => {
     dispatch(setIsUserAuthLoaded(true))
-    await auth.signInWithEmailAndPassword(email, password)
-        .then(userCredentials => {
-            dispatch(setLoginSuccessMessage(true))
-            const {uid} = userCredentials.user
-            firestore.doc(`users/${uid}`)
-                .get()
-                .then(snap => {
-                    setTimeout(() => {
-                        dispatch(setLoginSuccessMessage(false))
-                    }, 2000)
-                    if (!snap.data().userRoles.includes('admin')) return
-                    dispatch(setUserAdmin(true))
+        await auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
+        .then(() => {
+            auth.signInWithEmailAndPassword(email, password)
+                .then(userCredentials => {
+                    dispatch(setLoginSuccessMessage(true))
+                    const {uid} = userCredentials.user
+                    firestore.doc(`users/${uid}`)
+                        .get()
+                        .then(snap => {
+                            setTimeout(() => {
+                                dispatch(setLoginSuccessMessage(false))
+                            }, 2000)
+                            if (!snap.data().userRoles.includes('admin')) return
+                            dispatch(setUserAdmin(true))
+                        })
                 })
-
-        })
-        .catch(error => {
-            dispatch(setAuthError(error.code))
+                .catch(error => {
+                    dispatch(setAuthError(error.code))
+                })
         })
 }
 

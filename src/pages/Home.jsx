@@ -1,5 +1,5 @@
 import {useSelector} from "react-redux";
-import Modal from "../components/_UI/Modal";
+import LoginSuccess from "../components/LoginSuccess";
 import homeImage from '../assets/images/home-header.png'
 
 const Home = () => {
@@ -9,7 +9,7 @@ const Home = () => {
         <div className='home'>
             {
                 showSuccessMessage
-                    ? <Modal/>
+                    ? <LoginSuccess/>
                     : null
             }
             <img src={homeImage} alt="Header"/>
