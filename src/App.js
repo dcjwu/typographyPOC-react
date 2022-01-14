@@ -22,6 +22,7 @@ const App = () => {
    }, [])
 
    console.log('Simple github check.')
+   console.log('Another one. :)')
 
    return (
       <>
