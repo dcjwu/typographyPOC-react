@@ -13,6 +13,7 @@ const productsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 productList: action.payload,
+                productsByCategory: null,
                 isLoaded: true
             }
         case productsTypes.SET_PRODUCTS_BY_CATEGORY:
