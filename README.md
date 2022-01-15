@@ -1,4 +1,5 @@
 # [Demo](https://demo-typography-web.herokuapp.com/#/) Web App for Typography #
+>_Preview of this project is deployed on Heroku and takes about 40s to be loaded for the first time._
 #### January 2022 ####
 ---
 ## My first experience using Redux and Firebase. ##
