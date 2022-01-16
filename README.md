@@ -12,8 +12,9 @@
 
 #### Description: ####
 - Authentication through Firebase
-- Admin Panel
-- Search and Filter Products from Firestore
+- Admin Role
+- Filter Products from Firestore
+- Dynamic pagination
 - Send to backend data from Calculator to receive Price
 - Add Products to Cart
 - After checkout, created order is visible in Admin Panel
