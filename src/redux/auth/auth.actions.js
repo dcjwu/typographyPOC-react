@@ -35,6 +35,12 @@ export const checkCurrentUser = () => async dispatch => {
    await auth.onAuthStateChanged(user => {
       if (user) {
          dispatch(setCurrentUser())
+         firestore.doc(`users/${user.uid}`)
+            .get()
+            .then(snap => {
+               if (!snap.data().userRoles.includes('admin')) return
+               dispatch(setUserAdmin(true))
+            })
       }
    })
 }
