@@ -1,7 +1,17 @@
 import PropTypes from 'prop-types'
+import {useSelector} from 'react-redux'
+import Button from '../_UI/Button'
 import Spinner from '../_UI/Spinner'
 
-const TotalQuote = ({quantity, price, loading}) => {
+const TotalQuote = ({quantity, price, loading, addToCartDataReset, isQuoteActive}) => {
+
+   const handleAddToCart = () => {
+      if (isQuoteActive) {
+            console.log('Added to Cart.')
+            addToCartDataReset()
+      }
+   }
+
    return (
       <div className="quote">
          <div className="quote-item">
@@ -37,7 +47,9 @@ const TotalQuote = ({quantity, price, loading}) => {
                   </div>
             }
          </>
-         <button>Add to Basket</button>
+         <Button disabled={!(!!quantity && price !== 0)} onClick={handleAddToCart}>
+            Add to Cart
+         </Button>
       </div>
    )
 }

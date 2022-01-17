@@ -34,6 +34,18 @@ const LabelsCalculator = () => {
       else return true
    }
 
+   const addToCartDataReset = () => {
+      setMarkupType('')
+      setLabelSizeX('')
+      setLabelSizeY('')
+      setMaterial('')
+      setLaminated('')
+      setCutting('')
+      setRotation('')
+      setQuantity('')
+      setPrice(0)
+   }
+
    const checkPriceFromServer = (data) => {
       console.log(data)
       setTimeout(() => {
@@ -145,7 +157,12 @@ const LabelsCalculator = () => {
                Check Price
             </Button>
          </form>
-         <TotalQuote quantity={quantity} price={price} loading={loading}/>
+         <TotalQuote
+            quantity={quantity}
+            price={price}
+            loading={loading}
+            addToCartDataReset={addToCartDataReset}
+            isQuoteActive={true}/>
       </div>
    )
 }
