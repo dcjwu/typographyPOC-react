@@ -1,8 +1,14 @@
 import {useState} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
+import {setProductsToCart, setTotalPrice} from '../../../redux/cart/cart.actions'
 import Button from '../../_UI/Button'
 import TotalQuote from '../TotalQuote'
 
 const LabelsCalculator = () => {
+   const dispatch = useDispatch()
+   const {productById} = useSelector(({products}) => products)
+   const {title, calculator} = productById
+
    const [loading, setLoading] = useState(false)
    const [markupType, setMarkupType] = useState('')
    const [labelSizeX, setLabelSizeX] = useState('')
@@ -13,6 +19,7 @@ const LabelsCalculator = () => {
    const [rotation, setRotation] = useState('')
    const [quantity, setQuantity] = useState('')
    const [price, setPrice] = useState(0)
+   const [cartProduct, setCartProducts] = useState({})
 
    const onMarkupTypeChange = e => setMarkupType(e.target.value)
    const onLabelSizeXChange = e => setLabelSizeX(e.target.value)
@@ -34,6 +41,45 @@ const LabelsCalculator = () => {
       else return true
    }
 
+   const checkPriceFromServer = (data) => {
+      console.log(data)
+         new Promise((resolve, reject) => {
+            setTimeout(() => {
+               resolve(200)
+            }, 1500)
+         })
+            .then(price => {
+               setPrice(price)
+               setLoading(false)
+               setCartProducts(prevState => ({
+                  ...prevState,
+                  price
+               }))
+            })
+   }
+
+   const onSubmitForm = e => {
+      e.preventDefault()
+      const validation = formValidation()
+      if (validation) {
+         const dataReadyToCheckPrice = {
+            title,
+            productType: calculator,
+            markupType: +markupType,
+            labelSizeX: +labelSizeX,
+            labelSizeY: +labelSizeY,
+            material,
+            laminated,
+            cutting,
+            rotation,
+            quantity: +quantity
+         }
+         setCartProducts(dataReadyToCheckPrice)
+         checkPriceFromServer(JSON.stringify(dataReadyToCheckPrice))
+         setLoading(true)
+      }
+   }
+
    const addToCartDataReset = () => {
       setMarkupType('')
       setLabelSizeX('')
@@ -46,32 +92,10 @@ const LabelsCalculator = () => {
       setPrice(0)
    }
 
-   const checkPriceFromServer = (data) => {
-      console.log(data)
-      setTimeout(() => {
-         setPrice(117)
-         setLoading(false)
-      }, 1500)
-   }
-
-   const onSubmitForm = e => {
-      e.preventDefault()
-      const validation = formValidation()
-      if (validation) {
-         const dataReadyToCheckPrice = {
-            productType: 'label',
-            markupType: +markupType,
-            labelSizeX: +labelSizeX,
-            labelSizeY: +labelSizeY,
-            material,
-            laminated,
-            cutting,
-            rotation,
-            quantity: +quantity
-         }
-         checkPriceFromServer(JSON.stringify(dataReadyToCheckPrice))
-         setLoading(true)
-      }
+   const addProductToCart = () => {
+      dispatch(setProductsToCart(cartProduct))
+      // dispatch(setTotalPrice(price))
+      // addToCartDataReset()
    }
 
    return (
@@ -161,7 +185,7 @@ const LabelsCalculator = () => {
             quantity={quantity}
             price={price}
             loading={loading}
-            addToCartDataReset={addToCartDataReset}
+            addProdctToCart={addProductToCart}
             isQuoteActive={true}/>
       </div>
    )

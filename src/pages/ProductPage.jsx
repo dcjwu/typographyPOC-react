@@ -22,7 +22,7 @@ const ProductPage = () => {
       <>
          {
             !currentUser
-               ? <h1 className='alert-danger text-center p-5'>Please, Sign In to view this Page!</h1>
+               ? <h1 className="alert-danger text-center p-5">Please, Sign In to view this Page!</h1>
                : <div className="product">
                   {
                      !isLoaded
@@ -41,7 +41,7 @@ const ProductPage = () => {
                   }
                </div>
          }
-         </>
+      </>
    )
 }
 
