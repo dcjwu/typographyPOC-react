@@ -1,5 +1,6 @@
 import BooksCalculator from './Books/BooksCalculator'
 import EnvelopesCalculator from './Envelopes/EnvelopesCalculator'
+import LabelsCalculator from './Labels/LabelsCalculator'
 import PostcardsCalculator from './Postcards/PostcardsCalculator'
 import TotalQuote from './TotalQuote'
 
@@ -13,10 +14,9 @@ const Calculator = ({calculatorType}) => {
                   ? <EnvelopesCalculator/>
                   : calculatorType === 'postcard'
                      ? <PostcardsCalculator/>
-                     : null
-         }
-         {
-            calculatorType && <TotalQuote/>
+                     : calculatorType === 'label'
+                        ? <LabelsCalculator/>
+                        : null
          }
       </div>
    )

@@ -40,7 +40,13 @@
   transition: color .2s ease-in-out;
   cursor: pointer;
   &:hover {
-    color: #0a58ca;
+    color: $blue;
+  }
+  &.available {
+    color: #32bb32;
+    &:hover {
+      color: $blue;
+    }
   }
 }
 

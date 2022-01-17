@@ -1,6 +1,11 @@
+import TotalQuote from '../TotalQuote'
+
 const BooksCalculator = () => {
    return (
-      <h1>Books Calc!</h1>
+      <>
+         <h1>Books Calculator goes here!</h1>
+         <TotalQuote/>
+      </>
    )
 }
 

@@ -1,7 +1,10 @@
-const Spinner = () => {
+import PropTypes from 'prop-types'
+
+const Spinner = ({width, height}) => {
    return (
       <div className="d-flex justify-content-center">
-         <svg style={{width: 200, height: 200}} version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg"
+         <svg style={{width: width === undefined ? 200 : width, height: height === undefined ? 200 : height}}
+              version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg"
               xmlnsXlink="http://www.w3.org/1999/xlink"
               x="0px" y="0px"
               viewBox="0 0 100 100" enableBackground="new 0 0 0 0" xmlSpace="preserve">
@@ -19,6 +22,11 @@ const Spinner = () => {
          </svg>
       </div>
    )
+}
+
+Spinner.propTypes = {
+   width: PropTypes.number,
+   height: PropTypes.number
 }
 
 export default Spinner
