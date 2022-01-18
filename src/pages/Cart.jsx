@@ -58,11 +58,13 @@ const Cart = () => {
                                        </div>
                                     </div>
                                  </div>
-                                 <p>Quantity: {product.quantity}</p>
-                                 <p>Price: {product.price} EUR</p>
-                                 <button className='text-danger' onClick={() => onRemoveProductFromCart(product.id)}>
-                                    <FontAwesomeIcon icon={faTrashAlt}/>
-                                 </button>
+                                 <div className="cart-item-data">
+                                    <p>Quantity: {product.quantity}</p>
+                                    <p>Price: {product.price} EUR</p>
+                                    <button className='text-danger' onClick={() => onRemoveProductFromCart(product.id)}>
+                                       <FontAwesomeIcon icon={faTrashAlt}/>
+                                    </button>
+                                 </div>
                               </div>
                            ))
                         }
