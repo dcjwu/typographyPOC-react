@@ -46,7 +46,7 @@ const LabelsCalculator = () => {
       console.log(data)
          new Promise((resolve, reject) => {
             setTimeout(() => {
-               resolve(Math.floor(Math.random() * (500 - 50) + 50))
+               resolve(+(Math.random() * (500 - 50) + 50).toFixed(2))
             }, 1500)
          })
             .then(price => {

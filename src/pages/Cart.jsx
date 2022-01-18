@@ -60,7 +60,7 @@ const Cart = () => {
                                  </div>
                                  <p>Quantity: {product.quantity}</p>
                                  <p>Price: {product.price} EUR</p>
-                                 <button onClick={() => onRemoveProductFromCart(product.id)}>
+                                 <button className='text-danger' onClick={() => onRemoveProductFromCart(product.id)}>
                                     <FontAwesomeIcon icon={faTrashAlt}/>
                                  </button>
                               </div>
@@ -68,7 +68,7 @@ const Cart = () => {
                         }
                      </div>
                      <div className="cart-total alert-info p-2">
-                        <p>Total {totalPrice} EUR</p>
+                        <p>Total {totalPrice.toFixed(2)} EUR</p>
                      </div>
                      <div className="cart-proceed">
                         <Button onClick={goBackToPreviousPage}>Go Back</Button>

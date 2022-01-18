@@ -133,17 +133,18 @@
     background-color: #888888;
   }
   &-item {
-    width: 80%;
     padding: 1rem;
     margin: 1rem 0;
     background-color: #fff;
+    width: 100%;
+    border-radius: 1rem;
     @include breakpoint($bp576) {
       margin: 0;
       padding: .5rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      width: 20%;
+      width: 30%;
       height: 10rem;
     }
     &:first-child {
