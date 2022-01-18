@@ -20,6 +20,12 @@ const cartReducer = (state = initialState, action) => {
             cartProducts: state.cartProducts.filter(item => item.id !== action.payload),
             totalPrice: +(state.totalPrice - currentProductPrice).toFixed(2)
          }
+      case cartTypes.CLEAR_CART:
+         return {
+            ...state,
+            cartProducts: [],
+            totalPrice: 0
+         }
       default:
          return state
    }

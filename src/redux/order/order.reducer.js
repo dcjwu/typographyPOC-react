@@ -2,7 +2,8 @@ import orderTypes from './order.types'
 
 const initialState = {
    currentOrder: [],
-   orderListFromDb: []
+   orderListFromDb: [],
+   isDataLoaded: false
 }
 
 const orderReducer = (state = initialState, action) => {
@@ -15,7 +16,18 @@ const orderReducer = (state = initialState, action) => {
       case orderTypes.GET_ORDERS:
          return {
             ...state,
-            orderListFromDb: action.payload
+            orderListFromDb: action.payload,
+            isDataLoaded: true
+         }
+      case orderTypes.CLEAR_ORDER:
+         return {
+            ...state,
+            currentOrder: []
+         }
+      case orderTypes.SET_DATA_LOADED:
+         return {
+            ...state,
+            isDataLoaded: action.payload
          }
       default:
          return state

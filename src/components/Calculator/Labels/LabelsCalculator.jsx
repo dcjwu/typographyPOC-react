@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {v4 as uuidv4} from 'uuid'
 import {setProductsToCart} from '../../../redux/cart/cart.actions'
 import Button from '../../_UI/Button'
+import Modal from '../../_UI/Modal'
 import TotalQuote from '../TotalQuote'
 
 const LabelsCalculator = () => {
@@ -21,6 +22,8 @@ const LabelsCalculator = () => {
    const [quantity, setQuantity] = useState('')
    const [price, setPrice] = useState(0)
    const [cartProduct, setCartProducts] = useState({})
+
+   const [showModal, setShowModal] = useState(false)
 
    const onMarkupTypeChange = e => setMarkupType(e.target.value)
    const onLabelSizeXChange = e => setLabelSizeX(e.target.value)
@@ -44,19 +47,19 @@ const LabelsCalculator = () => {
 
    const checkPriceFromServer = (data) => {
       console.log(data)
-         new Promise((resolve, reject) => {
-            setTimeout(() => {
-               resolve(+(Math.random() * (500 - 50) + 50).toFixed(2))
-            }, 1500)
+      new Promise((resolve, reject) => {
+         setTimeout(() => {
+            resolve(+(Math.random() * (500 - 50) + 50).toFixed(2))
+         }, 1500)
+      })
+         .then(price => {
+            setPrice(price)
+            setLoading(false)
+            setCartProducts(prevState => ({
+               ...prevState,
+               price
+            }))
          })
-            .then(price => {
-               setPrice(price)
-               setLoading(false)
-               setCartProducts(prevState => ({
-                  ...prevState,
-                  price
-               }))
-            })
    }
 
    const onSubmitForm = e => {
@@ -97,10 +100,19 @@ const LabelsCalculator = () => {
    const onAddProductToCart = () => {
       dispatch(setProductsToCart(cartProduct))
       onAddToCartDataReset()
+      setShowModal(true)
+      setTimeout(() => {
+         setShowModal(false)
+      }, 2000)
    }
 
    return (
       <div className="calc">
+         {
+            showModal
+               ? <Modal isError={false} top='-20rem'>Product added to cart!</Modal>
+               : null
+         }
          <form onSubmit={onSubmitForm}>
             <div className="calc-markup">
                <h2>Please, choose markup:</h2>

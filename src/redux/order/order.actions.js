@@ -1,5 +1,5 @@
-import orderTypes from './order.types'
 import {firestore} from '../../firebase/utils'
+import orderTypes from './order.types'
 
 export const createOrder = (currentProducts, timestamp, id) => async dispatch => {
    await firestore
@@ -18,7 +18,17 @@ const setCreateOrder = products => ({
    payload: products
 })
 
+export const clearOrder = () => ({
+   type: orderTypes.CLEAR_ORDER
+})
+
+const setDataLoaded = isLoaded => ({
+   type: orderTypes.SET_DATA_LOADED,
+   payload: isLoaded
+})
+
 export const getOrdersFromDB = () => async dispatch => {
+   dispatch(setDataLoaded(false))
    await firestore.collection('orders').orderBy('dateCreated')
       .get()
       .then(products => {

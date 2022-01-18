@@ -1,0 +1,14 @@
+@import '../vendor/vars';
+@import "../vendor/mixins";
+
+.modal {
+  &-window {
+    width: 80%;
+    height: 20rem;
+    position: absolute;
+    left: 50%;
+    z-index: 9999;
+    transform: translateX(-50%);
+    font-size: 2.5rem;
+  }
+}

@@ -1,13 +1,17 @@
-import {useDispatch, useSelector} from 'react-redux'
+import {useState} from 'react'
 import {useHistory} from 'react-router-dom'
+import {useDispatch, useSelector} from 'react-redux'
 import {v4 as uuidv4} from 'uuid'
 import Button from '../components/_UI/Button'
-import {removeProductFromCart} from '../redux/cart/cart.actions'
+import Modal from '../components/_UI/Modal'
+import {clearCart, removeProductFromCart} from '../redux/cart/cart.actions'
 import {faTrashAlt} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {createOrder} from '../redux/order/order.actions'
+import {clearOrder, createOrder} from '../redux/order/order.actions'
 
 const Cart = () => {
+   const [showModal, setShowModal] = useState(false)
+
    const history = useHistory()
    const goBackToPreviousPage = () => {
       history.goBack()
@@ -24,68 +28,79 @@ const Cart = () => {
       const timestamp = Date.now()
       const orderId = uuidv4()
       dispatch(createOrder(cart, timestamp, orderId))
+      setShowModal(true)
+      setTimeout(() => {
+         setShowModal(false)
+         history.push('/')
+         dispatch(clearCart())
+         dispatch(clearOrder())
+      }, 2000)
    }
 
    return (
       <>
          {
-            cartProducts.length === 0
-               ? <h2 className="alert-warning p-5 text-center">The cart is empty...</h2>
-               : <div className="container-content">
-                  <div className="cart">
-                     <div className="cart-wrapper">
-                        {
-                           cartProducts && cartProducts.map(product => (
-                              <div className="cart-item" key={uuidv4()}>
-                                 <div className="cart-item-name">
-                                    <h5>{product.title}</h5>
-                                    <div className="details">
-                                       <div className="row-item">
-                                          <p>Size X:</p>
-                                          <p>{product.labelSizeX}</p>
-                                       </div>
-                                       <div className="row-item">
-                                          <p>Size Y:</p>
-                                          <p>{product.labelSizeY}</p>
-                                       </div>
-                                       <div className="row-item">
-                                          <p>Material:</p>
-                                          <p>{product.material}</p>
-                                       </div>
-                                       <div className="row-item">
-                                          <p>Laminated:</p>
-                                          <p>{product.laminated}</p>
-                                       </div>
-                                       <div className="row-item">
-                                          <p>Cutting</p>
-                                          <p>{product.cutting}</p>
-                                       </div>
-                                       <div className="row-item">
-                                          <p>Rotation:</p>
-                                          <p>{product.rotation}</p>
+            showModal
+               ? <div className="container-content">
+                  <Modal isError={false} top='5rem'>Order was successfully created!</Modal>
+               </div>
+               : cartProducts.length === 0
+                  ? <h2 className="alert-warning p-5 text-center">The cart is empty...</h2>
+                  : <div className="container-content">
+                     <div className="cart">
+                        <div className="cart-wrapper">
+                           {
+                              cartProducts && cartProducts.map(product => (
+                                 <div className="cart-item" key={uuidv4()}>
+                                    <div className="cart-item-name">
+                                       <h5>{product.title}</h5>
+                                       <div className="details">
+                                          <div className="row-item">
+                                             <p>Size X:</p>
+                                             <p>{product.labelSizeX}</p>
+                                          </div>
+                                          <div className="row-item">
+                                             <p>Size Y:</p>
+                                             <p>{product.labelSizeY}</p>
+                                          </div>
+                                          <div className="row-item">
+                                             <p>Material:</p>
+                                             <p>{product.material}</p>
+                                          </div>
+                                          <div className="row-item">
+                                             <p>Laminated:</p>
+                                             <p>{product.laminated}</p>
+                                          </div>
+                                          <div className="row-item">
+                                             <p>Cutting</p>
+                                             <p>{product.cutting}</p>
+                                          </div>
+                                          <div className="row-item">
+                                             <p>Rotation:</p>
+                                             <p>{product.rotation}</p>
+                                          </div>
                                        </div>
                                     </div>
+                                    <div className="cart-item-data">
+                                       <p>Quantity: {product.quantity}</p>
+                                       <p>Price: {product.price} EUR</p>
+                                       <button className="text-danger" onClick={() => onRemoveProductFromCart(product.id)}>
+                                          <FontAwesomeIcon icon={faTrashAlt}/>
+                                       </button>
+                                    </div>
                                  </div>
-                                 <div className="cart-item-data">
-                                    <p>Quantity: {product.quantity}</p>
-                                    <p>Price: {product.price} EUR</p>
-                                    <button className='text-danger' onClick={() => onRemoveProductFromCart(product.id)}>
-                                       <FontAwesomeIcon icon={faTrashAlt}/>
-                                    </button>
-                                 </div>
-                              </div>
-                           ))
-                        }
-                     </div>
-                     <div className="cart-total alert-info p-2">
-                        <p>Total: {totalPrice} EUR</p>
-                     </div>
-                     <div className="cart-proceed">
-                        <Button onClick={goBackToPreviousPage}>Go Back</Button>
-                        <Button onClick={handleCreateOrder}>Pay Now</Button>
+                              ))
+                           }
+                        </div>
+                        <div className="cart-total alert-info p-2">
+                           <p>Total: {totalPrice} EUR</p>
+                        </div>
+                        <div className="cart-proceed">
+                           <Button onClick={goBackToPreviousPage}>Go Back</Button>
+                           <Button onClick={handleCreateOrder}>Create Order</Button>
+                        </div>
                      </div>
                   </div>
-               </div>
          }
       </>
    )

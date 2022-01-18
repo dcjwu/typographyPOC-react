@@ -9,11 +9,13 @@
 @import "./blocks/shop";
 @import "./blocks/product";
 @import "./blocks/admin";
+@import "./blocks/modal";
 
 .container-content {
-  max-width: 80rem;
   margin: 0 auto;
   padding: 0 2.5rem;
+  max-width: 80rem;
+  position: relative;
 }
 
 .main {

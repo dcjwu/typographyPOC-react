@@ -1,8 +1,10 @@
 import {useCallback, useState} from 'react'
 import {useDispatch} from 'react-redux'
+import {clearOrder} from '../../redux/order/order.actions'
 import Navbar from './Navbar/Navbar'
 import Sidebar from './Sidebar/Sidebar'
 import {userLogout} from '../../redux/auth/auth.actions'
+import {clearCart} from '../../redux/cart/cart.actions'
 
 const Menu = () => {
    const dispatch = useDispatch()
@@ -15,6 +17,8 @@ const Menu = () => {
 
    const handleLogoutUser = useCallback(() => {
       dispatch(userLogout())
+      dispatch(clearOrder())
+      dispatch(clearCart())
    }, [])
 
    return (

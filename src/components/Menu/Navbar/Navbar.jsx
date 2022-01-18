@@ -1,5 +1,6 @@
 import {NavLink} from 'react-router-dom'
 import {useSelector} from 'react-redux'
+import Modal from '../../_UI/Modal'
 import Logo from './Logo'
 import Cart from './Cart'
 import classNames from 'classnames'
