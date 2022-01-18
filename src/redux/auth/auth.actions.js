@@ -64,7 +64,7 @@ const setUserAdmin = isAdmin => ({
    payload: isAdmin
 })
 
-const setAuthError = error => ({
+export const setAuthError = error => ({
    type: authTypes.SET_AUTH_ERROR,
    payload: error
 })

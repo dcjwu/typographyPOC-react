@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import Input from '../components/_UI/Input'
 import Button from '../components/_UI/Button'
 import Spinner from '../components/_UI/Spinner'
-import {userAuth} from '../redux/auth/auth.actions'
+import {setAuthError, userAuth} from '../redux/auth/auth.actions'
 
 const Login = () => {
    const dispatch = useDispatch()
@@ -12,7 +12,7 @@ const Login = () => {
    const [email, setEmail] = useState('')
    const [password, setPassword] = useState('')
 
-   const {setAuthError, currentUser, isUserAuthLoaded} = useSelector(({auth}) => auth)
+   const {authError, currentUser, isUserAuthLoaded} = useSelector(({auth}) => auth)
 
    const onInputEmail = e => setEmail(e.target.value)
    const onInputPassword = e => setPassword(e.target.value)
@@ -39,10 +39,24 @@ const Login = () => {
          {
             !isUserAuthLoaded
                ? <div className="container-content">
+                  <div className="login-text">
+                     <div className="d-flex align-items-center justify-content-center gap-5 alert-info p-4">
+                        <small>
+                           <b>ADMIN</b>
+                           <p>email: a@d.min</p>
+                           <p>password: admin0</p>
+                        </small>
+                        <small>
+                           <b>USER</b>
+                           <p>email: u@s.er</p>
+                           <p>password: user00</p>
+                        </small>
+                     </div>
+                  </div>
                   {
-                     setAuthError && <h5 className="mt-5 text-center text-danger">{setAuthError}</h5>
+                     authError && <h5 className="mt-3 text-center text-danger">{authError}</h5>
                   }
-                  <form className="mt-5 form-custom" onSubmit={handleFormSubmit}>
+                  <form className="mt-3 form-custom" onSubmit={handleFormSubmit}>
                      <div className="form-group mb-5">
                         <Input type="email" placeholder="Email address..." value={email}
                                onUpdateValue={onInputEmail}/>

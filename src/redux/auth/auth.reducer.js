@@ -4,7 +4,7 @@ const initialState = {
    showSuccessMessage: false,
    currentUser: false,
    isAdmin: false,
-   setAuthError: '',
+   authError: '',
    isUserAuthLoaded: false
 }
 
@@ -14,13 +14,13 @@ const authReducer = (state = initialState, action) => {
          return {
             ...state,
             showSuccessMessage: action.payload,
-            setAuthError: ''
+            authError: ''
          }
       case authTypes.CURRENT_USER:
          return {
             ...state,
             currentUser: action.payload,
-            setAuthError: '',
+            authError: '',
             isUserAuthLoaded: true
          }
       case authTypes.IS_USER_ADMIN:
@@ -34,14 +34,14 @@ const authReducer = (state = initialState, action) => {
             showSuccessMessage: false,
             currentUser: false,
             isAdmin: false,
-            setAuthError: '',
+            authError: '',
             isUserAuthLoaded: false
          }
       case authTypes.SET_AUTH_ERROR:
          return {
             ...state,
             showSuccessMessage: false,
-            setAuthError: action.payload,
+            authError: action.payload,
             isUserAuthLoaded: false
          }
       case authTypes.SET_USER_AUTH_LOADED:

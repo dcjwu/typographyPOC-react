@@ -5,6 +5,7 @@ import Button from '../components/_UI/Button'
 import {removeProductFromCart} from '../redux/cart/cart.actions'
 import {faTrashAlt} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {createOrder} from '../redux/order/order.actions'
 
 const Cart = () => {
    const history = useHistory()
@@ -12,10 +13,17 @@ const Cart = () => {
       history.goBack()
    }
    const dispatch = useDispatch()
-   const {cartProducts, totalPrice} = useSelector(({cart}) => cart)
+   const cart = useSelector(({cart}) => cart)
+   const {cartProducts, totalPrice} = cart
 
    const onRemoveProductFromCart = id => {
       dispatch(removeProductFromCart(id))
+   }
+
+   const handleCreateOrder = () => {
+      const timestamp = Date.now()
+      const orderId = uuidv4()
+      dispatch(createOrder(cart, timestamp, orderId))
    }
 
    return (
@@ -70,11 +78,11 @@ const Cart = () => {
                         }
                      </div>
                      <div className="cart-total alert-info p-2">
-                        <p>Total {totalPrice.toFixed(2)} EUR</p>
+                        <p>Total: {totalPrice} EUR</p>
                      </div>
                      <div className="cart-proceed">
                         <Button onClick={goBackToPreviousPage}>Go Back</Button>
-                        <Button>Pay Now</Button>
+                        <Button onClick={handleCreateOrder}>Pay Now</Button>
                      </div>
                   </div>
                </div>
