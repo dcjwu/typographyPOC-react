@@ -5,15 +5,16 @@ import {getOrdersFromDB} from '../redux/order/order.actions'
 
 const Admin = () => {
    const dispatch = useDispatch()
+   const {orderListFromDb} = useSelector(({order}) => order)
+
    useEffect(() => {
       dispatch(getOrdersFromDB())
    }, [])
-   const {orderListFromDb} = useSelector(({order}) => order)
 
    return (
       <>
          {
-            orderListFromDb.length === 0
+            orderListFromDb && orderListFromDb.length === 0
                ? <h1 className="alert-warning p-5 text-center">No active orders...</h1>
                : <div className="container-content">
                   <h1 className="admin-header">Order list:</h1>

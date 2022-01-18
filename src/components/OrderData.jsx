@@ -2,7 +2,7 @@ import {v4 as uuidv4} from 'uuid'
 
 const OrderData = ({product}) => {
 
-   const {title, productType, price, markupType, id, ...otherData} = product
+   const {title, productType, price, markupType, id, quantity, ...otherData} = product
 
    const sortObjects = (productData) => {
       return Object.entries(productData)
@@ -23,12 +23,14 @@ const OrderData = ({product}) => {
             <div className="orders-item-keys">
                <p>Title:</p>
                <p>Type:</p>
+               <p>Quantity:</p>
                <p>Markup:</p>
                <p>Price:</p>
             </div>
             <div className="orders-item-values">
                <p>{title}</p>
                <p>{productType}</p>
+               <p>{quantity}</p>
                <p>{markupType}</p>
                <p>{price}</p>
             </div>

@@ -14,7 +14,7 @@ const Order = ({order, index}) => {
    }
 
    const transformedDate = () => {
-      return moment(order.dateCreated).format('DD/MM/YYYY hh:mm:ss')
+      return moment(order.dateCreated).format('DD/MM/YYYY HH:mm')
    }
 
    return (
