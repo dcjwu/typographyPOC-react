@@ -21,4 +21,5 @@
 
 ---
 ### Status: ####
-_Just started._
+- _85% finished._
+- _15%_ == _Minor fixes, change order status._
