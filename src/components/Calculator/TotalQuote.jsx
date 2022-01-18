@@ -2,11 +2,11 @@ import PropTypes from 'prop-types'
 import Button from '../_UI/Button'
 import Spinner from '../_UI/Spinner'
 
-const TotalQuote = ({quantity, price, loading, addProdctToCart, isQuoteActive}) => {
+const TotalQuote = ({quantity, price, loading, onAddProductToCart, isQuoteActive}) => {
 
    const handleAddToCart = () => {
       if (isQuoteActive) {
-         addProdctToCart()
+         onAddProductToCart()
       }
    }
 

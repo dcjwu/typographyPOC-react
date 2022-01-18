@@ -5,24 +5,21 @@ const initialState = {
    totalPrice: 0
 }
 
-const getTotalPrice = arr => arr.reduce((accumulator, current) => accumulator + current.price, 0)
-
 const cartReducer = (state = initialState, action) => {
    switch (action.type) {
       case cartTypes.SET_PRODUCT_TO_CART:
-         const currentProductPrice = !state.cartProducts
-            ? action.payload.price
-            : getTotalPrice(state.cartProducts)
          return {
             ...state,
             cartProducts: [...state.cartProducts, action.payload],
-            totalPrice: currentProductPrice
+            totalPrice: state.totalPrice += action.payload.price
          }
-      // case cartTypes.SET_TOTAL_PRICE:
-      //    return {
-      //       ...state,
-      //       totalPrice: getTotalPrice(state.cartProducts)
-      //    }
+      case cartTypes.REMOVE_PRODUCT_FROM_CART:
+         const currentProductPrice = state.cartProducts.find(item => item.id === action.payload).price
+         return {
+            ...state,
+            cartProducts: state.cartProducts.filter(item => item.id !== action.payload),
+            totalPrice: state.totalPrice - currentProductPrice
+         }
       default:
          return state
    }

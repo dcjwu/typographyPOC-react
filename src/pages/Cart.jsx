@@ -1,16 +1,22 @@
+import {useDispatch, useSelector} from 'react-redux'
 import {useHistory} from 'react-router-dom'
-import {useSelector} from 'react-redux'
 import {v4 as uuidv4} from 'uuid'
+import Button from '../components/_UI/Button'
+import {removeProductFromCart} from '../redux/cart/cart.actions'
 import {faTrashAlt} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import Button from '../components/_UI/Button'
 
 const Cart = () => {
    const history = useHistory()
    const goBackToPreviousPage = () => {
       history.goBack()
    }
-   const {cartProducts} = useSelector(({cart}) => cart)
+   const dispatch = useDispatch()
+   const {cartProducts, totalPrice} = useSelector(({cart}) => cart)
+
+   const onRemoveProductFromCart = id => {
+      dispatch(removeProductFromCart(id))
+   }
 
    return (
       <>
@@ -21,7 +27,7 @@ const Cart = () => {
                   <div className="cart">
                      <div className="cart-wrapper">
                         {
-                           cartProducts.map(product => (
+                           cartProducts && cartProducts.map(product => (
                               <div className="cart-item" key={uuidv4()}>
                                  <div className="cart-item-name">
                                     <h5>{product.title}</h5>
@@ -54,7 +60,7 @@ const Cart = () => {
                                  </div>
                                  <p>Quantity: {product.quantity}</p>
                                  <p>Price: {product.price} EUR</p>
-                                 <button>
+                                 <button onClick={() => onRemoveProductFromCart(product.id)}>
                                     <FontAwesomeIcon icon={faTrashAlt}/>
                                  </button>
                               </div>
@@ -62,7 +68,7 @@ const Cart = () => {
                         }
                      </div>
                      <div className="cart-total alert-info p-2">
-                        <p>Total 100 EUR</p>
+                        <p>Total {totalPrice} EUR</p>
                      </div>
                      <div className="cart-proceed">
                         <Button onClick={goBackToPreviousPage}>Go Back</Button>

@@ -1,8 +1,8 @@
+import {useEffect} from 'react'
 import {Link, useParams, useRouteMatch} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
-import {useEffect} from 'react'
-import {getFilteredProducts} from '../redux/products/products.actions'
 import Spinner from '../components/_UI/Spinner'
+import {getFilteredProducts} from '../redux/products/products.actions'
 
 const ProductCategory = () => {
    const {category} = useParams()

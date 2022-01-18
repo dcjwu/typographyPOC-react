@@ -1,5 +1,5 @@
-import classNames from 'classnames'
 import {Link} from 'react-router-dom'
+import classNames from 'classnames'
 
 const categoryNames = ['books', 'envelopes', 'postcards', 'labels'].sort()
 

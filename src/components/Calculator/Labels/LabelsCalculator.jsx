@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {setProductsToCart, setTotalPrice} from '../../../redux/cart/cart.actions'
+import {v4 as uuidv4} from 'uuid'
+import {setProductsToCart} from '../../../redux/cart/cart.actions'
 import Button from '../../_UI/Button'
 import TotalQuote from '../TotalQuote'
 
@@ -45,7 +46,7 @@ const LabelsCalculator = () => {
       console.log(data)
          new Promise((resolve, reject) => {
             setTimeout(() => {
-               resolve(200)
+               resolve(Math.floor(Math.random() * (500 - 50) + 50))
             }, 1500)
          })
             .then(price => {
@@ -63,6 +64,7 @@ const LabelsCalculator = () => {
       const validation = formValidation()
       if (validation) {
          const dataReadyToCheckPrice = {
+            id: uuidv4(),
             title,
             productType: calculator,
             markupType: +markupType,
@@ -80,7 +82,7 @@ const LabelsCalculator = () => {
       }
    }
 
-   const addToCartDataReset = () => {
+   const onAddToCartDataReset = () => {
       setMarkupType('')
       setLabelSizeX('')
       setLabelSizeY('')
@@ -92,10 +94,9 @@ const LabelsCalculator = () => {
       setPrice(0)
    }
 
-   const addProductToCart = () => {
+   const onAddProductToCart = () => {
       dispatch(setProductsToCart(cartProduct))
-      // dispatch(setTotalPrice(price))
-      // addToCartDataReset()
+      onAddToCartDataReset()
    }
 
    return (
@@ -185,7 +186,7 @@ const LabelsCalculator = () => {
             quantity={quantity}
             price={price}
             loading={loading}
-            addProdctToCart={addProductToCart}
+            onAddProductToCart={onAddProductToCart}
             isQuoteActive={true}/>
       </div>
    )

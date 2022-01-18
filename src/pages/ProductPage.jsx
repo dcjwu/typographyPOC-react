@@ -1,6 +1,6 @@
 import {useEffect} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
 import {useParams} from 'react-router-dom'
+import {useDispatch, useSelector} from 'react-redux'
 import Spinner from '../components/_UI/Spinner'
 import Calculator from '../components/Calculator/Calculator'
 import {clearProductById, getProductById} from '../redux/products/products.actions'

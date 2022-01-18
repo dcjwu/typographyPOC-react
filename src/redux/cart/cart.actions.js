@@ -5,7 +5,7 @@ export const setProductsToCart = products => ({
    payload: products
 })
 
-export const setTotalPrice = price => ({
-   type: cartTypes.SET_TOTAL_PRICE,
-   payload: price
+export const removeProductFromCart = id => ({
+   type: cartTypes.REMOVE_PRODUCT_FROM_CART,
+   payload: id
 })
