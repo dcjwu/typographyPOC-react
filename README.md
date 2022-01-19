@@ -12,14 +12,16 @@
 
 #### Description: ####
 - Authentication through Firebase
-- Admin Role
+- User Roles
 - Filter Products from Firestore
-- Dynamic pagination
-- Send to backend data from Calculator to receive Price
+- Dynamic Pagination
+- Send data to backend from Calculator to receive Price
 - Add Products to Cart
-- After checkout, created order is visible in Admin Panel
+- Create Order from Cart
+- Created order is visible in Admin Panel
+- Change and Filter orders by Status in Admin Panel
 
 ---
 ### Status: ####
-- _85% finished._
-- _15%_ == _Minor fixes, change order status._
+- _95% finished._
+- _5%_ == _Possible minor fixes and request do backend._

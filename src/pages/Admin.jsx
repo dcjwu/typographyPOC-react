@@ -1,15 +1,13 @@
 import {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {useHistory} from 'react-router-dom'
 import Button from '../components/_UI/Button'
 import Spinner from '../components/_UI/Spinner'
 import Order from '../components/Order'
 import {getOrdersFromDB} from '../redux/order/order.actions'
 
-const filterButtons = ['in progress', 'completed', 'canceled']
+const filterButtons = ['in progress', 'completed', 'canceled', 'all']
 
 const Admin = () => {
-   const history = useHistory()
 
    const dispatch = useDispatch()
    const {orderListFromDb, isDataLoaded} = useSelector(({order}) => order)
@@ -21,7 +19,7 @@ const Admin = () => {
       dispatch(getOrdersFromDB(filter))
    }
 
-   const handleGoBack = () => {
+   const handleGetAllOrders = () => {
       dispatch(getOrdersFromDB())
    }
 
@@ -34,7 +32,7 @@ const Admin = () => {
                   ? <>
                      <h1 className="alert-warning p-5 text-center">No orders to display...</h1>
                      <div className='text-center mt-4'>
-                        <Button onClick={handleGoBack}>Go Back</Button>
+                        <Button onClick={handleGetAllOrders}>Go Back</Button>
                      </div>
                   </>
                   : <div className="container-content">
@@ -52,6 +50,9 @@ const Admin = () => {
                                  if (button === 'canceled') return <Button key={button}
                                                                            onClick={() => handleFilteredProducts(button)}
                                                                            additionalClass="text-capitalize btn-outline-danger">{button}</Button>
+                                 if (button === 'all') return <Button key={button}
+                                                                           onClick={() => handleGetAllOrders(button)}
+                                                                           additionalClass="text-capitalize">{button}</Button>
                               })
                            }
                         </div>
