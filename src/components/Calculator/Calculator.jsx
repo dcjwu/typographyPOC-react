@@ -1,7 +1,7 @@
 import BooksCalculator from './Books/BooksCalculator'
 import EnvelopesCalculator from './Envelopes/EnvelopesCalculator'
-import PostcardsCalculator from './Postcards/PostcardsCalculator'
 import LabelsCalculator from './Labels/LabelsCalculator'
+import PostcardsCalculator from './Postcards/PostcardsCalculator'
 
 const Calculator = ({calculatorType}) => {
    return (

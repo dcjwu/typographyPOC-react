@@ -1,6 +1,6 @@
 import {useEffect} from 'react'
-import {Link, useParams, useRouteMatch} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
+import {Link, useParams, useRouteMatch} from 'react-router-dom'
 import Spinner from '../components/_UI/Spinner'
 import {getFilteredProducts} from '../redux/products/products.actions'
 

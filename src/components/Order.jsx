@@ -1,6 +1,6 @@
+import moment from 'moment'
 import {useState} from 'react'
 import {useDispatch} from 'react-redux'
-import moment from 'moment'
 import {findCollectionId} from '../redux/order/order.actions'
 import Button from './_UI/Button'
 import OrderData from './OrderData'

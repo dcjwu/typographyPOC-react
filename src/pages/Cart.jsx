@@ -1,12 +1,12 @@
+import {faTrashAlt} from '@fortawesome/free-solid-svg-icons'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {useState} from 'react'
-import {useHistory} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
+import {useHistory} from 'react-router-dom'
 import {v4 as uuidv4} from 'uuid'
 import Button from '../components/_UI/Button'
 import Modal from '../components/_UI/Modal'
 import {clearCart, removeProductFromCart} from '../redux/cart/cart.actions'
-import {faTrashAlt} from '@fortawesome/free-solid-svg-icons'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {clearOrder, createOrder} from '../redux/order/order.actions'
 
 const Cart = () => {

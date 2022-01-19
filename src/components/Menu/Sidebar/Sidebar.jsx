@@ -1,6 +1,6 @@
-import {useRef, useEffect} from 'react'
-import SidebarLinks from './SidebarLinks'
 import classNames from 'classnames'
+import {useEffect, useRef} from 'react'
+import SidebarLinks from './SidebarLinks'
 
 const Sidebar = ({toggleNavStatus, toggleNavHandler, handleLogoutUser}) => {
 

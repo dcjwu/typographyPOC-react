@@ -1,5 +1,5 @@
-import productsTypes from './products.types'
 import {firestore} from '../../firebase/utils'
+import productsTypes from './products.types'
 
 export const getProducts = () => async dispatch => {
    dispatch(setLoaded(false))

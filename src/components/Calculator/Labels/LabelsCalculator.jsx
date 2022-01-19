@@ -1,7 +1,6 @@
 import {useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {v4 as uuidv4} from 'uuid'
-import axios from 'axios'
 import {setProductsToCart} from '../../../redux/cart/cart.actions'
 import {convertToYesNo} from '../../../utils/dataModification'
 import Button from '../../_UI/Button'

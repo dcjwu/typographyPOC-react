@@ -1,6 +1,6 @@
 import {memo} from 'react'
-import {NavLink} from 'react-router-dom'
 import {useSelector} from 'react-redux'
+import {NavLink} from 'react-router-dom'
 import CategoryList from './CategoryList'
 
 const SidebarLinks = memo(({handleClickInside, handleLogoutUser}) => {

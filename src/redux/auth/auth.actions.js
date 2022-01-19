@@ -1,6 +1,6 @@
-import authTypes from './auth.types'
 import firebase from 'firebase/compat/app'
 import {auth, firestore} from '../../firebase/utils'
+import authTypes from './auth.types'
 
 export const userAuth = (email, password) => async dispatch => {
    dispatch(setIsUserAuthLoaded(true))

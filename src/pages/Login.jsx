@@ -1,10 +1,10 @@
 import {useEffect, useState} from 'react'
-import {useHistory} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
-import Input from '../components/_UI/Input'
+import {useHistory} from 'react-router-dom'
 import Button from '../components/_UI/Button'
+import Input from '../components/_UI/Input'
 import Spinner from '../components/_UI/Spinner'
-import {setAuthError, userAuth} from '../redux/auth/auth.actions'
+import {userAuth} from '../redux/auth/auth.actions'
 
 const Login = () => {
    const dispatch = useDispatch()
