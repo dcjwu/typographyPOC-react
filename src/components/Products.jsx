@@ -21,16 +21,14 @@ const Products = () => {
             !isLoaded
                ? <Spinner/>
                : productList && productList.map(product => (
-               <div className="shop-card-item" key={product.id}>
+               <Link className="shop-card-item" key={product.id} to={`${url}/${product.category}/${product.id}`}>
                   <div className="card">
                      <img className="card-img-top" src={product.imageUrl} alt="Product"/>
                      <div className="card-body">
-                        <Link
-                           className="card-text text-center link"
-                           to={`${url}/${product.category}/${product.id}`}>{product.title}</Link>
+                        <span className="card-text text-center link">{product.title}</span>
                      </div>
                   </div>
-               </div>
+               </Link>
             ))
          }
       </>
