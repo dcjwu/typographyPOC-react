@@ -34,7 +34,7 @@ export const setLoginSuccessMessage = successFlag => ({
 export const checkCurrentUser = () => async dispatch => {
    await auth.onAuthStateChanged(user => {
       if (user) {
-         dispatch(setCurrentUser())
+         dispatch(setCurrentUser(user.email))
          firestore.doc(`users/${user.uid}`)
             .get()
             .then(snap => {
@@ -45,9 +45,9 @@ export const checkCurrentUser = () => async dispatch => {
    })
 }
 
-const setCurrentUser = () => ({
+const setCurrentUser = email => ({
    type: authTypes.CURRENT_USER,
-   payload: true
+   payload: email
 })
 
 export const userLogout = () => async dispatch => {

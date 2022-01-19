@@ -32,7 +32,7 @@ const OrderData = ({product}) => {
                <p>{productType}</p>
                <p>{quantity}</p>
                <p>{markupType}</p>
-               <p>{price}</p>
+               <p>{price.toFixed(2)}</p>
             </div>
          </div>
          <div className="order-item-wrapper">

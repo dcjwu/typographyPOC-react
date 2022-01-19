@@ -22,11 +22,14 @@ const ProductCategory = () => {
                : productsByCategory && productsByCategory.map(product => (
                <div className="shop-card-item" key={product.id}>
                   <div className="card">
-                     <img className="card-img-top" src={product.imageUrl} alt="Product"/>
+                     <Link to={`${url}/${product.id}`}>
+                        <img className="card-img-top" src={product.imageUrl} alt="Product"/>
+                     </Link>
                      <div className="card-body">
                         <Link
                            className="card-text text-center link"
-                           to={`${url}/${product.id}`}>{product.title}</Link>
+                           to={`${url}/${product.id}`}>{product.title}
+                        </Link>
                      </div>
                   </div>
                </div>

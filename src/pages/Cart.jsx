@@ -18,6 +18,7 @@ const Cart = () => {
    }
    const dispatch = useDispatch()
    const cart = useSelector(({cart}) => cart)
+   const {currentUser} = useSelector(({auth}) => auth)
    const {cartProducts, totalPrice} = cart
 
    const onRemoveProductFromCart = id => {
@@ -27,14 +28,15 @@ const Cart = () => {
    const handleCreateOrder = () => {
       const timestamp = Date.now()
       const orderId = uuidv4()
-      dispatch(createOrder(cart, timestamp, orderId))
+      const status = 'in progress'
+      dispatch(createOrder(cart, timestamp, orderId, currentUser, status))
       setShowModal(true)
       setTimeout(() => {
          setShowModal(false)
          history.push('/')
          dispatch(clearCart())
          dispatch(clearOrder())
-      }, 800)
+      }, 500)
    }
 
    return (
@@ -42,7 +44,7 @@ const Cart = () => {
          {
             showModal
                ? <div className="container-content">
-                  <Modal isError={false} top='5rem'>Order was successfully created!</Modal>
+                  <Modal isError={false} top="5rem">Order was successfully created!</Modal>
                </div>
                : cartProducts.length === 0
                   ? <h2 className="alert-warning p-5 text-center">The cart is empty...</h2>
@@ -83,7 +85,7 @@ const Cart = () => {
                                     </div>
                                     <div className="cart-item-data">
                                        <p>Quantity: {product.quantity}</p>
-                                       <p>Price: {product.price} EUR</p>
+                                       <p>Price: {product.price.toFixed(2)} EUR</p>
                                        <button className="text-danger" onClick={() => onRemoveProductFromCart(product.id)}>
                                           <FontAwesomeIcon icon={faTrashAlt}/>
                                        </button>
@@ -93,7 +95,7 @@ const Cart = () => {
                            }
                         </div>
                         <div className="cart-total alert-info p-2">
-                           <p>Total: {totalPrice} EUR</p>
+                           <p>Total: {totalPrice.toFixed(2)} EUR</p>
                         </div>
                         <div className="cart-proceed">
                            <Button onClick={goBackToPreviousPage}>Go Back</Button>

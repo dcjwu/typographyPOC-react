@@ -58,3 +58,7 @@ small {
   display: block;
   text-align: center;
 }
+
+.card > a:hover + .card-body > a {
+  color: $blue;
+}

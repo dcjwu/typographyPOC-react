@@ -54,7 +54,7 @@ const TotalQuote = ({quantity, price, loading, onAddProductToCart, isQuoteActive
 
 TotalQuote.propTypes = {
    quantity: PropTypes.string,
-   price: PropTypes.number,
+   // price: PropTypes.number,
    loading: PropTypes.bool
 }
 

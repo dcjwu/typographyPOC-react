@@ -48,27 +48,33 @@ const LabelsCalculator = () => {
    }
 
    const checkPriceFromServer = (data) => {
-          axios.post('https://intense-brook-26480.herokuapp.com/', data)
-             .then(response => {
-                console.log(response)
-             })
-             .catch(error => {
-                console.log(error)
-             })
-      // console.log(data)
-      // new Promise((resolve, reject) => {
-      //    setTimeout(() => {
-      //       resolve(+(Math.random() * (500 - 50) + 50).toFixed(2))
-      //    }, 1500)
+      // axios({
+      //    method: 'post',
+      //    url: 'https://intense-brook-26480.herokuapp.com/',
+      //    data: {
+      //       data
+      //    }
       // })
-      //    .then(price => {
-      //       setPrice(price)
-      //       setLoading(false)
-      //       setCartProducts(prevState => ({
-      //          ...prevState,
-      //          price
-      //       }))
+      //    .then(response => {
+      //       console.log(response)
       //    })
+      //    .catch(error => {
+      //       console.log(error)
+      //    })
+      console.log(data)
+      new Promise((resolve, reject) => {
+         setTimeout(() => {
+            resolve(+(Math.random() * (500 - 50) + 50).toFixed(2))
+         }, 1500)
+      })
+         .then(price => {
+            setPrice(price.toFixed(2))
+            setLoading(false)
+            setCartProducts(prevState => ({
+               ...prevState,
+               price
+            }))
+         })
    }
 
    const onSubmitForm = e => {
@@ -115,14 +121,14 @@ const LabelsCalculator = () => {
       setShowModal(true)
       setTimeout(() => {
          setShowModal(false)
-      }, 800)
+      }, 500)
    }
 
    return (
       <div className="calc">
          {
             showModal
-               ? <Modal isError={false} top='-20rem'>Product added to cart!</Modal>
+               ? <Modal isError={false} top="-20rem">Product added to cart!</Modal>
                : null
          }
          <form onSubmit={onSubmitForm}>

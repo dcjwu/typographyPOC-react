@@ -1,5 +1,4 @@
 import {useSelector} from 'react-redux'
-import LoginSuccess from '../components/LoginSuccess'
 import homeImage from '../assets/images/home-header.png'
 
 const Home = () => {
@@ -9,7 +8,7 @@ const Home = () => {
       <div className="home">
          {
             showSuccessMessage
-               ? <LoginSuccess/>
+               ? <p className="alert-success p-5 text-center opacity-75 login-success">Login Success!</p>
                : null
          }
          <img src={homeImage} alt="Header"/>
