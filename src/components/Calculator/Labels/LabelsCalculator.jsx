@@ -1,7 +1,9 @@
 import {useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {v4 as uuidv4} from 'uuid'
+import axios from 'axios'
 import {setProductsToCart} from '../../../redux/cart/cart.actions'
+import {convertToYesNo} from '../../../utils/dataModification'
 import Button from '../../_UI/Button'
 import Modal from '../../_UI/Modal'
 import TotalQuote from '../TotalQuote'
@@ -46,20 +48,27 @@ const LabelsCalculator = () => {
    }
 
    const checkPriceFromServer = (data) => {
-      console.log(data)
-      new Promise((resolve, reject) => {
-         setTimeout(() => {
-            resolve(+(Math.random() * (500 - 50) + 50).toFixed(2))
-         }, 1500)
-      })
-         .then(price => {
-            setPrice(price)
-            setLoading(false)
-            setCartProducts(prevState => ({
-               ...prevState,
-               price
-            }))
-         })
+          axios.post('https://intense-brook-26480.herokuapp.com/', data)
+             .then(response => {
+                console.log(response)
+             })
+             .catch(error => {
+                console.log(error)
+             })
+      // console.log(data)
+      // new Promise((resolve, reject) => {
+      //    setTimeout(() => {
+      //       resolve(+(Math.random() * (500 - 50) + 50).toFixed(2))
+      //    }, 1500)
+      // })
+      //    .then(price => {
+      //       setPrice(price)
+      //       setLoading(false)
+      //       setCartProducts(prevState => ({
+      //          ...prevState,
+      //          price
+      //       }))
+      //    })
    }
 
    const onSubmitForm = e => {
@@ -67,20 +76,23 @@ const LabelsCalculator = () => {
       const validation = formValidation()
       if (validation) {
          const dataReadyToCheckPrice = {
-            id: uuidv4(),
             title,
             productType: calculator,
             markupType: +markupType,
             labelSizeX: +labelSizeX,
             labelSizeY: +labelSizeY,
             material,
-            laminated,
-            cutting,
-            rotation,
-            quantity: +quantity
+            laminated: +laminated,
+            cutting: +cutting,
+            rotation: +rotation,
+            quantity: +quantity,
+            id: uuidv4()
          }
-         setCartProducts(dataReadyToCheckPrice)
          checkPriceFromServer(JSON.stringify(dataReadyToCheckPrice))
+         dataReadyToCheckPrice.laminated = convertToYesNo(dataReadyToCheckPrice.laminated)
+         dataReadyToCheckPrice.cutting = convertToYesNo(dataReadyToCheckPrice.cutting)
+         dataReadyToCheckPrice.rotation = convertToYesNo(dataReadyToCheckPrice.rotation)
+         setCartProducts(dataReadyToCheckPrice)
          setLoading(true)
       }
    }
@@ -103,7 +115,7 @@ const LabelsCalculator = () => {
       setShowModal(true)
       setTimeout(() => {
          setShowModal(false)
-      }, 2000)
+      }, 800)
    }
 
    return (
@@ -153,8 +165,8 @@ const LabelsCalculator = () => {
                <div className="calc-row-option--select">
                   <select value={laminated} onChange={onLaminatedChange}>
                      <option value="" disabled hidden>- Choose -</option>
-                     <option value="no">No</option>
-                     <option value="yes">Yes</option>
+                     <option value="0">No</option>
+                     <option value="1">Yes</option>
                   </select>
                </div>
             </div>
@@ -165,8 +177,8 @@ const LabelsCalculator = () => {
                <div className="calc-row-option--select">
                   <select value={cutting} onChange={onCuttingChange}>
                      <option value="" disabled hidden>- Choose -</option>
-                     <option value="no">No</option>
-                     <option value="yes">Yes</option>
+                     <option value="0">No</option>
+                     <option value="1">Yes</option>
                   </select>
                </div>
             </div>
@@ -177,8 +189,8 @@ const LabelsCalculator = () => {
                <div className="calc-row-option--select">
                   <select value={rotation} onChange={onRotationChange}>
                      <option value="" disabled hidden>- Choose -</option>
-                     <option value="no">No</option>
-                     <option value="yes">Yes</option>
+                     <option value="0">No</option>
+                     <option value="1">Yes</option>
                   </select>
                </div>
             </div>

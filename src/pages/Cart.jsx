@@ -34,7 +34,7 @@ const Cart = () => {
          history.push('/')
          dispatch(clearCart())
          dispatch(clearOrder())
-      }, 2000)
+      }, 800)
    }
 
    return (
