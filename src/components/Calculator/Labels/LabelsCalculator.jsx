@@ -49,11 +49,9 @@ const LabelsCalculator = () => {
    }
 
    const checkPriceFromServer = (data) => {
-      axios({
-         method: 'post',
-         url: 'https://flask-react-testing-app.herokuapp.com/',
-         data: {
-            data
+      axios.post('https://flask-react-testing-app.herokuapp.com/', data, {
+         headers: {
+            'Content-Type': 'application/json'
          }
       })
          .then(response => {

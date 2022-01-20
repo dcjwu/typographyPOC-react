@@ -23,5 +23,5 @@
 
 ---
 ### Status: ####
-- _95% finished._
-- _5%_ == _Possible minor fixes and request do backend._
+- _98% finished._
+- _2%_ == _Possible minor fixes._
