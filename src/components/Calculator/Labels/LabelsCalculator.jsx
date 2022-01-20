@@ -13,7 +13,6 @@ const LabelsCalculator = () => {
    const {productById} = useSelector(({products}) => products)
    const {title, calculator} = productById
 
-   const [loading, setLoading] = useState(false)
    const [markupType, setMarkupType] = useState('')
    const [labelSizeX, setLabelSizeX] = useState('')
    const [labelSizeY, setLabelSizeY] = useState('')
@@ -25,6 +24,7 @@ const LabelsCalculator = () => {
    const [price, setPrice] = useState(0)
    const [cartProduct, setCartProducts] = useState({})
 
+   const [loading, setLoading] = useState(false)
    const [modalSuccess, setModalSuccess] = useState(false)
    const [requestError, setRequestError] = useState(false)
 
@@ -208,7 +208,7 @@ const LabelsCalculator = () => {
                   <input type="number" min={1} placeholder={'Quantity'} value={quantity} onChange={onQuantityChange}/>
                </div>
             </div>
-            <Button type="submit">
+            <Button type="submit" disabled={loading}>
                Check Price
             </Button>
          </form>
