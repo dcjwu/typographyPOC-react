@@ -48,6 +48,8 @@ const LabelsCalculator = () => {
       else return true
    }
 
+   console.log('ok')
+
    const checkPriceFromServer = (data) => {
       axios({
          method: 'post',
