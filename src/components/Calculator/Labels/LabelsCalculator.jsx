@@ -1,3 +1,4 @@
+import axios from 'axios'
 import {useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {v4 as uuidv4} from 'uuid'
@@ -24,7 +25,8 @@ const LabelsCalculator = () => {
    const [price, setPrice] = useState(0)
    const [cartProduct, setCartProducts] = useState({})
 
-   const [showModal, setShowModal] = useState(false)
+   const [modalSuccess, setModalSuccess] = useState(false)
+   const [requestError, setRequestError] = useState(false)
 
    const onMarkupTypeChange = e => setMarkupType(e.target.value)
    const onLabelSizeXChange = e => setLabelSizeX(e.target.value)
@@ -47,32 +49,26 @@ const LabelsCalculator = () => {
    }
 
    const checkPriceFromServer = (data) => {
-      // axios({
-      //    method: 'post',
-      //    url: 'https://intense-brook-26480.herokuapp.com/',
-      //    data: {
-      //       data
-      //    }
-      // })
-      //    .then(response => {
-      //       console.log(response)
-      //    })
-      //    .catch(error => {
-      //       console.log(error)
-      //    })
-      console.log(data)
-      new Promise((resolve, reject) => {
-         setTimeout(() => {
-            resolve(+(Math.random() * (500 - 50) + 50).toFixed(2))
-         }, 1500)
+      axios({
+         method: 'post',
+         url: 'http://localhost:5000/',
+         data: {
+            data
+         }
       })
-         .then(price => {
-            setPrice(price.toFixed(2))
+         .then(response => {
+            const price = Number(response.data)
+            setPrice(price)
             setLoading(false)
             setCartProducts(prevState => ({
                ...prevState,
                price
             }))
+         })
+         .catch(error => {
+            setPrice(0)
+            setRequestError(error)
+            setLoading(false)
          })
    }
 
@@ -117,17 +113,22 @@ const LabelsCalculator = () => {
    const onAddProductToCart = () => {
       dispatch(setProductsToCart(cartProduct))
       onAddToCartDataReset()
-      setShowModal(true)
+      setModalSuccess(true)
       setTimeout(() => {
-         setShowModal(false)
+         setModalSuccess(false)
       }, 500)
    }
 
    return (
       <div className="calc">
          {
-            showModal
+            modalSuccess
                ? <Modal isError={false} top="-20rem">Product added to cart!</Modal>
+               : null
+         }
+         {
+            requestError
+               ? <Modal top="-20rem" isError={true}>Error. Please, contact Admin.</Modal>
                : null
          }
          <form onSubmit={onSubmitForm}>
