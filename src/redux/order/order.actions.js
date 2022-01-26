@@ -1,9 +1,9 @@
-import {firestore} from '../../firebase/utils'
-import orderTypes from './order.types'
+import { firestore } from "../../firebase/utils"
+import orderTypes from "./order.types"
 
 export const createOrder = (currentProducts, timestamp, id, email, status) => async dispatch => {
    await firestore
-      .collection('orders')
+      .collection("orders")
       .doc()
       .set({
          ...currentProducts,
@@ -20,9 +20,7 @@ const setCreateOrder = products => ({
    payload: products
 })
 
-export const clearOrder = () => ({
-   type: orderTypes.CLEAR_ORDER
-})
+export const clearOrder = () => ({ type: orderTypes.CLEAR_ORDER })
 
 const setDataLoaded = isLoaded => ({
    type: orderTypes.SET_DATA_LOADED,
@@ -31,9 +29,9 @@ const setDataLoaded = isLoaded => ({
 
 export const getOrdersFromDB = filter => async dispatch => {
    dispatch(setDataLoaded(false))
-   let ref = await firestore.collection('orders').orderBy('dateCreated')
-   if (filter) ref = await firestore.collection('orders').orderBy('dateCreated').where('orderStatus', '==', filter)
-      ref.get()
+   let ref = await firestore.collection("orders").orderBy("dateCreated")
+   if (filter) ref = await firestore.collection("orders").orderBy("dateCreated").where("orderStatus", "==", filter)
+   ref.get()
       .then(products => {
          let readyData = []
          products.docs.forEach(product => {
@@ -49,7 +47,7 @@ const setOrdersFromDB = orders => ({
 })
 
 export const findCollectionId = (id, status) => async dispatch => {
-   await firestore.collection('orders').where('orderId', '==', id)
+   await firestore.collection("orders").where("orderId", "==", id)
       .get()
       .then(data => data.docs.forEach(currentDoc => {
          updateCollectionOrderStatus(currentDoc.id, status)
@@ -58,7 +56,5 @@ export const findCollectionId = (id, status) => async dispatch => {
 }
 
 const updateCollectionOrderStatus = async (collectionId, status) => {
-   await firestore.collection('orders').doc(collectionId).update({
-      'orderStatus': status
-   })
+   await firestore.collection("orders").doc(collectionId).update({ "orderStatus": status })
 }

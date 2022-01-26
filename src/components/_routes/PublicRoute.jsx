@@ -1,11 +1,15 @@
-import {Redirect, Route} from 'react-router-dom'
+import { Redirect, Route } from "react-router-dom"
 
-const PublicRoute = ({component: Component, auth, ...otherProps}) => {
+const PublicRoute = ({
+   component: Component,
+   auth,
+   ...otherProps
+}) => {
    return (
       <Route {...otherProps} render={(props) => (
          auth === false
             ? <Component {...props}/>
-            : <Redirect to={'/'}/>
+            : <Redirect to={"/"}/>
       )}>
 
       </Route>

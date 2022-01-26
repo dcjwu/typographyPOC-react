@@ -1,9 +1,9 @@
-import {firestore} from '../../firebase/utils'
-import productsTypes from './products.types'
+import { firestore } from "../../firebase/utils"
+import productsTypes from "./products.types"
 
 export const getProducts = () => async dispatch => {
    dispatch(setLoaded(false))
-   await firestore.collection('products').orderBy('title')
+   await firestore.collection("products").orderBy("title")
       .get()
       .then(products => {
          let readyData = []
@@ -21,7 +21,7 @@ const setProducts = products => ({
 
 export const getFilteredProducts = filter => async dispatch => {
    dispatch(setLoaded(false))
-   await firestore.collection('products').orderBy('title').where('category', '==', filter)
+   await firestore.collection("products").orderBy("title").where("category", "==", filter)
       .get()
       .then(products => {
          let readyData = []
@@ -39,7 +39,7 @@ const setFilteredProducts = data => ({
 
 export const getProductById = id => async dispatch => {
    dispatch(setLoaded(false))
-   await firestore.collection('products').where('id', '==', id)
+   await firestore.collection("products").where("id", "==", id)
       .get()
       .then(product => {
          product.docs.forEach(productById => {
@@ -53,9 +53,7 @@ const setProductById = product => ({
    payload: product
 })
 
-export const clearProductById = () => ({
-   type: productsTypes.CLEAR_PRODUCT_BY_ID
-})
+export const clearProductById = () => ({ type: productsTypes.CLEAR_PRODUCT_BY_ID })
 
 const setLoaded = isLoaded => ({
    type: productsTypes.SET_LOADED,

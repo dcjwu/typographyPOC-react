@@ -1,4 +1,4 @@
-import cartTypes from './cart.types'
+import cartTypes from "./cart.types"
 
 export const setProductsToCart = products => ({
    type: cartTypes.SET_PRODUCT_TO_CART,
@@ -10,6 +10,4 @@ export const removeProductFromCart = id => ({
    payload: id
 })
 
-export const clearCart = () => ({
-   type: cartTypes.CLEAR_CART
-})
+export const clearCart = () => ({ type: cartTypes.CLEAR_CART })

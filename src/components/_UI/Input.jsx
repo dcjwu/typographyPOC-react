@@ -1,10 +1,15 @@
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types"
 
-const Input = ({type, placeholder, value, onUpdateValue}) => {
+const Input = ({
+   type,
+   placeholder,
+   value,
+   onUpdateValue
+}) => {
    return (
       <input className="form-control me-2"
-             type={type}
              placeholder={placeholder}
+             type={type}
              value={value}
              onChange={onUpdateValue}>
       </input>

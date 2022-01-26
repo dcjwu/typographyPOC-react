@@ -1,30 +1,36 @@
-import {useEffect, useState} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import {useHistory} from 'react-router-dom'
-import Button from '../components/_UI/Button'
-import Input from '../components/_UI/Input'
-import Spinner from '../components/_UI/Spinner'
-import {userAuth} from '../redux/auth/auth.actions'
+import { useEffect, useState } from "react"
+
+import { useDispatch, useSelector } from "react-redux"
+import { useHistory } from "react-router-dom"
+
+import Button from "../components/_UI/Button"
+import Input from "../components/_UI/Input"
+import Spinner from "../components/_UI/Spinner"
+import { userAuth } from "../redux/auth/auth.actions"
 
 const Login = () => {
    const dispatch = useDispatch()
    const history = useHistory()
-   const [email, setEmail] = useState('')
-   const [password, setPassword] = useState('')
+   const [email, setEmail] = useState("")
+   const [password, setPassword] = useState("")
 
-   const {authError, currentUser, isUserAuthLoaded} = useSelector(({auth}) => auth)
+   const {
+      authError,
+      currentUser,
+      isUserAuthLoaded
+   } = useSelector(({ auth }) => auth)
 
    const onInputEmail = e => setEmail(e.target.value)
    const onInputPassword = e => setPassword(e.target.value)
 
    const resetForm = () => {
-      setEmail('')
-      setPassword('')
+      setEmail("")
+      setPassword("")
    }
 
    useEffect(() => {
       if (currentUser) {
-         history.push('/')
+         history.push("/")
       }
    }, [currentUser])
 
@@ -54,15 +60,18 @@ const Login = () => {
                      </div>
                   </div>
                   {
-                     authError && <h5 className="mt-3 text-center text-danger">{authError}</h5>
+                     authError &&
+                     <h5 className="mt-3 text-center text-danger">{authError}</h5>
                   }
                   <form className="mt-3 form-custom" onSubmit={handleFormSubmit}>
                      <div className="form-group mb-5">
-                        <Input type="email" placeholder="Email address..." value={email}
+                        <Input placeholder="Email address..." type="email"
+                               value={email}
                                onUpdateValue={onInputEmail}/>
                      </div>
                      <div className="form-group mb-5">
-                        <Input type="password" placeholder="Password..." value={password}
+                        <Input placeholder="Password..." type="password"
+                               value={password}
                                onUpdateValue={onInputPassword}/>
                      </div>
                      <Button type="submit">Submit</Button>

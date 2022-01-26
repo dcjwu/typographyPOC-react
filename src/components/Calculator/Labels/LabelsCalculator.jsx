@@ -1,26 +1,31 @@
-import axios from 'axios'
-import {useState} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import {v4 as uuidv4} from 'uuid'
-import {setProductsToCart} from '../../../redux/cart/cart.actions'
-import {convertToYesNo} from '../../../utils/dataModification'
-import Button from '../../_UI/Button'
-import Modal from '../../_UI/Modal'
-import TotalQuote from '../TotalQuote'
+import { useState } from "react"
+
+import axios from "axios"
+import { useDispatch, useSelector } from "react-redux"
+import { v4 as uuidv4 } from "uuid"
+
+import { setProductsToCart } from "../../../redux/cart/cart.actions"
+import { convertToYesNo } from "../../../utils/dataModification"
+import Button from "../../_UI/Button"
+import Modal from "../../_UI/Modal"
+import TotalQuote from "../TotalQuote"
 
 const LabelsCalculator = () => {
    const dispatch = useDispatch()
-   const {productById} = useSelector(({products}) => products)
-   const {title, calculator} = productById
+   const { productById } = useSelector(({ products }) => products)
+   const {
+      title,
+      calculator
+   } = productById
 
-   const [markupType, setMarkupType] = useState('')
-   const [labelSizeX, setLabelSizeX] = useState('')
-   const [labelSizeY, setLabelSizeY] = useState('')
-   const [material, setMaterial] = useState('')
-   const [laminated, setLaminated] = useState('')
-   const [cutting, setCutting] = useState('')
-   const [rotation, setRotation] = useState('')
-   const [quantity, setQuantity] = useState('')
+   const [markupType, setMarkupType] = useState("")
+   const [labelSizeX, setLabelSizeX] = useState("")
+   const [labelSizeY, setLabelSizeY] = useState("")
+   const [material, setMaterial] = useState("")
+   const [laminated, setLaminated] = useState("")
+   const [cutting, setCutting] = useState("")
+   const [rotation, setRotation] = useState("")
+   const [quantity, setQuantity] = useState("")
    const [price, setPrice] = useState(0)
    const [cartProduct, setCartProducts] = useState({})
 
@@ -38,22 +43,18 @@ const LabelsCalculator = () => {
    const onQuantityChange = e => setQuantity(e.target.value)
 
    const formValidation = () => {
-      if (markupType === '') alert('Please, specify Markup Type.')
-      else if (labelSizeX === '' || labelSizeY === '') alert('Please, specify Label Size.')
-      else if (material === '') alert('Please, specify Material.')
-      else if (laminated === '') alert('Please, specify Laminated.')
-      else if (cutting === '') alert('Please, specify Cutting.')
-      else if (rotation === '') alert('Please, specify Rotation.')
-      else if (quantity === '') alert('Please, specify Quantity.')
+      if (markupType === "") alert("Please, specify Markup Type.")
+      else if (labelSizeX === "" || labelSizeY === "") alert("Please, specify Label Size.")
+      else if (material === "") alert("Please, specify Material.")
+      else if (laminated === "") alert("Please, specify Laminated.")
+      else if (cutting === "") alert("Please, specify Cutting.")
+      else if (rotation === "") alert("Please, specify Rotation.")
+      else if (quantity === "") alert("Please, specify Quantity.")
       else return true
    }
 
    const checkPriceFromServer = (data) => {
-      axios.post('https://flask-react-testing-app.herokuapp.com/', data, {
-         headers: {
-            'Content-Type': 'application/json'
-         }
-      })
+      axios.post("https://flask-react-testing-app.herokuapp.com/", data, { headers: { "Content-Type": "application/json" } })
          .then(response => {
             const price = Number(response.data)
             setPrice(price)
@@ -97,14 +98,14 @@ const LabelsCalculator = () => {
    }
 
    const onAddToCartDataReset = () => {
-      setMarkupType('')
-      setLabelSizeX('')
-      setLabelSizeY('')
-      setMaterial('')
-      setLaminated('')
-      setCutting('')
-      setRotation('')
-      setQuantity('')
+      setMarkupType("")
+      setLabelSizeX("")
+      setLabelSizeY("")
+      setMaterial("")
+      setLaminated("")
+      setCutting("")
+      setRotation("")
+      setQuantity("")
       setPrice(0)
    }
 
@@ -121,12 +122,14 @@ const LabelsCalculator = () => {
       <div className="calc">
          {
             modalSuccess
-               ? <Modal isError={false} top="-20rem">Product added to cart!</Modal>
+               ? <Modal isError={false} top="-20rem">Product added to
+                  cart!</Modal>
                : null
          }
          {
             requestError
-               ? <Modal top="-20rem" isError={true}>Error. Please, contact Admin.</Modal>
+               ? <Modal isError={true} top="-20rem">Error. Please, contact
+                  Admin.</Modal>
                : null
          }
          <form onSubmit={onSubmitForm}>
@@ -144,8 +147,10 @@ const LabelsCalculator = () => {
                   Label Size (mm):
                </div>
                <div className="calc-row-option--input">
-                  <input type="number" min={10} placeholder="X" value={labelSizeX} onChange={onLabelSizeXChange}/>
-                  <input type="number" min={10} placeholder="Y" value={labelSizeY} onChange={onLabelSizeYChange}/>
+                  <input min={10} placeholder="X" type="number"
+                         value={labelSizeX} onChange={onLabelSizeXChange}/>
+                  <input min={10} placeholder="Y" type="number"
+                         value={labelSizeY} onChange={onLabelSizeYChange}/>
                </div>
             </div>
             <div className="calc-row">
@@ -154,7 +159,7 @@ const LabelsCalculator = () => {
                </div>
                <div className="calc-row-option--select">
                   <select value={material} onChange={onMaterialChange}>
-                     <option value="" disabled hidden>- Choose -</option>
+                     <option disabled hidden value="">- Choose -</option>
                      <option value="film">Film</option>
                      <option value="gloss">Gloss</option>
                      <option value="matt">Matt</option>
@@ -168,7 +173,7 @@ const LabelsCalculator = () => {
                </div>
                <div className="calc-row-option--select">
                   <select value={laminated} onChange={onLaminatedChange}>
-                     <option value="" disabled hidden>- Choose -</option>
+                     <option disabled hidden value="">- Choose -</option>
                      <option value="0">No</option>
                      <option value="1">Yes</option>
                   </select>
@@ -180,7 +185,7 @@ const LabelsCalculator = () => {
                </div>
                <div className="calc-row-option--select">
                   <select value={cutting} onChange={onCuttingChange}>
-                     <option value="" disabled hidden>- Choose -</option>
+                     <option disabled hidden value="">- Choose -</option>
                      <option value="0">No</option>
                      <option value="1">Yes</option>
                   </select>
@@ -192,7 +197,7 @@ const LabelsCalculator = () => {
                </div>
                <div className="calc-row-option--select">
                   <select value={rotation} onChange={onRotationChange}>
-                     <option value="" disabled hidden>- Choose -</option>
+                     <option disabled hidden value="">- Choose -</option>
                      <option value="0">No</option>
                      <option value="1">Yes</option>
                   </select>
@@ -203,19 +208,19 @@ const LabelsCalculator = () => {
                   Quantity:
                </div>
                <div className="calc-row-option--input--q">
-                  <input type="number" min={1} placeholder={'Quantity'} value={quantity} onChange={onQuantityChange}/>
+                  <input min={1} placeholder={"Quantity"} type="number"
+                         value={quantity} onChange={onQuantityChange}/>
                </div>
             </div>
-            <Button type="submit" disabled={loading}>
+            <Button disabled={loading} type="submit">
                Check Price
             </Button>
          </form>
-         <TotalQuote
-            quantity={quantity}
-            price={price}
-            loading={loading}
-            onAddProductToCart={onAddProductToCart}
-            isQuoteActive={true}/>
+         <TotalQuote isQuoteActive={true}
+                     loading={loading}
+                     price={price}
+                     quantity={quantity}
+                     onAddProductToCart={onAddProductToCart}/>
       </div>
    )
 }

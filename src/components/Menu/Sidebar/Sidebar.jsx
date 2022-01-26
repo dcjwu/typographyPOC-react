@@ -1,8 +1,14 @@
-import classNames from 'classnames'
-import {useEffect, useRef} from 'react'
-import SidebarLinks from './SidebarLinks'
+import { useEffect, useRef } from "react"
 
-const Sidebar = ({toggleNavStatus, toggleNavHandler, handleLogoutUser}) => {
+import classNames from "classnames"
+
+import SidebarLinks from "./SidebarLinks"
+
+const Sidebar = ({
+   toggleNavStatus,
+   toggleNavHandler,
+   handleLogoutUser
+}) => {
 
    const outsideClickRef = useRef()
    useEffect(() => {
@@ -11,9 +17,9 @@ const Sidebar = ({toggleNavStatus, toggleNavHandler, handleLogoutUser}) => {
             toggleNavHandler(false)
          }
       }
-      document.addEventListener('click', checkIfClickedOutside)
+      document.addEventListener("click", checkIfClickedOutside)
       return () => {
-         document.removeEventListener('click', checkIfClickedOutside)
+         document.removeEventListener("click", checkIfClickedOutside)
       }
    }, [toggleNavStatus])
 
@@ -24,10 +30,10 @@ const Sidebar = ({toggleNavStatus, toggleNavHandler, handleLogoutUser}) => {
    }
 
    return (
-      <div ref={outsideClickRef} className={classNames('sidebar bg-light text-center p-3', {
-         'active': toggleNavStatus
-      })}>
-         <SidebarLinks handleClickInside={handleClickInside} handleLogoutUser={handleLogoutUser}/>
+      <div ref={outsideClickRef}
+           className={classNames("sidebar bg-light text-center p-3", { "active": toggleNavStatus })}>
+         <SidebarLinks handleClickInside={handleClickInside}
+                       handleLogoutUser={handleLogoutUser}/>
       </div>
    )
 }

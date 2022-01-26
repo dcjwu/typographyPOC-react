@@ -1,11 +1,16 @@
-import moment from 'moment'
-import {useState} from 'react'
-import {useDispatch} from 'react-redux'
-import {findCollectionId} from '../redux/order/order.actions'
-import Button from './_UI/Button'
-import OrderData from './OrderData'
+import { useState } from "react"
 
-const Order = ({order, index}) => {
+import moment from "moment"
+import { useDispatch } from "react-redux"
+
+import { findCollectionId } from "../redux/order/order.actions"
+import Button from "./_UI/Button"
+import OrderData from "./OrderData"
+
+const Order = ({
+   order,
+   index
+}) => {
    const dispatch = useDispatch()
 
    const [showDetails, setShowDetails] = useState(false)
@@ -20,7 +25,7 @@ const Order = ({order, index}) => {
 
    const handleStatusChange = e => setStatus(e.target.value)
 
-   const transformedDate = () => moment(order.dateCreated).format('DD/MM/YYYY HH:mm')
+   const transformedDate = () => moment(order.dateCreated).format("DD/MM/YYYY HH:mm")
 
    const saveNewOrderStatus = orderId => {
       if (order.orderStatus === status) {
@@ -37,13 +42,13 @@ const Order = ({order, index}) => {
             <p className="order-info text-primary text-center">{order.customerEmail}</p>
             <p className="order-info text-secondary text-center">{order.totalPrice.toFixed(2)} EUR</p>
             <p className="order-info text-secondary text-center">{transformedDate()}</p>
-            <Button onClick={handleShowDetails}>{showDetails ? 'Close' : 'Show'}</Button>
+            <Button onClick={handleShowDetails}>{showDetails ? "Close" : "Show"}</Button>
          </div>
-         <p className={`order-info ${order.orderStatus === 'in progress'
-            ? 'text-warning'
-            : order.orderStatus === 'completed'
-               ? 'text-success'
-               : 'text-danger'} text-center`}
+         <p className={`order-info ${order.orderStatus === "in progress"
+            ? "text-warning"
+            : order.orderStatus === "completed"
+               ? "text-success"
+               : "text-danger"} text-center`}
          >{order.orderStatus}</p>
          {
             !showDetails
@@ -59,7 +64,7 @@ const Order = ({order, index}) => {
                   </div>
                   <div className="order-data">
                      {
-                        order.cartProducts.map((product, index) => (
+                        order.cartProducts.map(product => (
                            <OrderData key={product.id} product={product}/>
                         ))
                      }

@@ -1,6 +1,7 @@
-import firebase from 'firebase/compat/app'
-import {auth, firestore} from '../../firebase/utils'
-import authTypes from './auth.types'
+import firebase from "firebase/compat/app"
+
+import { auth, firestore } from "../../firebase/utils"
+import authTypes from "./auth.types"
 
 export const userAuth = (email, password) => async dispatch => {
    dispatch(setIsUserAuthLoaded(true))
@@ -9,14 +10,14 @@ export const userAuth = (email, password) => async dispatch => {
          auth.signInWithEmailAndPassword(email, password)
             .then(userCredentials => {
                dispatch(setLoginSuccessMessage(true))
-               const {uid} = userCredentials.user
+               const { uid } = userCredentials.user
                firestore.doc(`users/${uid}`)
                   .get()
                   .then(snap => {
                      setTimeout(() => {
                         dispatch(setLoginSuccessMessage(false))
                      }, 2000)
-                     if (!snap.data().userRoles.includes('admin')) return
+                     if (!snap.data().userRoles.includes("admin")) return
                      dispatch(setUserAdmin(true))
                   })
             })
@@ -38,7 +39,7 @@ export const checkCurrentUser = () => async dispatch => {
          firestore.doc(`users/${user.uid}`)
             .get()
             .then(snap => {
-               if (!snap.data().userRoles.includes('admin')) return
+               if (!snap.data().userRoles.includes("admin")) return
                dispatch(setUserAdmin(true))
             })
       }
@@ -55,9 +56,7 @@ export const userLogout = () => async dispatch => {
       .then(dispatch(setUserLogout()))
 }
 
-const setUserLogout = () => ({
-   type: authTypes.SET_USER_LOGOUT
-})
+const setUserLogout = () => ({ type: authTypes.SET_USER_LOGOUT })
 
 const setUserAdmin = isAdmin => ({
    type: authTypes.IS_USER_ADMIN,

@@ -1,19 +1,25 @@
-import classNames from 'classnames'
-import {useSelector} from 'react-redux'
-import {NavLink} from 'react-router-dom'
-import Cart from './Cart'
-import Logo from './Logo'
+import classNames from "classnames"
+import { useSelector } from "react-redux"
+import { NavLink } from "react-router-dom"
 
-const Navbar = ({toggleNavHandler, toggleNavStatus, handleLogoutUser}) => {
-   const {currentUser, isAdmin} = useSelector(({auth}) => auth)
+import Cart from "./Cart"
+import Logo from "./Logo"
+
+const Navbar = ({
+   toggleNavHandler,
+   toggleNavStatus,
+   handleLogoutUser
+}) => {
+   const {
+      currentUser,
+      isAdmin
+   } = useSelector(({ auth }) => auth)
 
    return (
       <div className="navbar bg-light navbar--custom">
          <div className="container">
-            <div onClick={!toggleNavStatus ? () => toggleNavHandler(true) : null}
-                 className={classNames('nav-icon', {
-                    'active': toggleNavStatus
-                 })}
+            <div className={classNames("nav-icon", { "active": toggleNavStatus })}
+               onClick={!toggleNavStatus ? () => toggleNavHandler(true) : null}
             >
                <span/>
                <span/>
@@ -26,12 +32,15 @@ const Navbar = ({toggleNavHandler, toggleNavStatus, handleLogoutUser}) => {
             {
                !isAdmin
                   ? null
-                  : <NavLink className="link shop-link" to="/admin">Admin Panel</NavLink>
+                  : <NavLink className="link shop-link" to="/admin">Admin
+                     Panel</NavLink>
             }
             {
                !currentUser
-                  ? <NavLink className="link shop-link" to="/login">LOGIN</NavLink>
-                  : <span onClick={handleLogoutUser} className="link shop-link">LOGOUT</span>
+                  ? <NavLink className="link shop-link"
+                             to="/login">LOGIN</NavLink>
+                  : <span className="link shop-link"
+                          onClick={handleLogoutUser}>LOGOUT</span>
             }
             <Cart/>
          </div>

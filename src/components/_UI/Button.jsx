@@ -1,11 +1,17 @@
-import PropTypes from 'prop-types'
-import Input from './Input'
+import PropTypes from "prop-types"
 
-const Button = ({children, type, additionalClass, ...otherProps}) => {
+import Input from "./Input"
+
+const Button = ({
+   children,
+   type,
+   additionalClass,
+   ...otherProps
+}) => {
    return (
       <button {...otherProps}
-         className={`btn btn-outline-primary ${additionalClass}`}
-         type={type}
+              className={`btn btn-outline-primary ${additionalClass}`}
+              type={type}
       >
          {children}
       </button>

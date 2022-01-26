@@ -1,13 +1,15 @@
-import {faTrashAlt} from '@fortawesome/free-solid-svg-icons'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {useState} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import {useHistory} from 'react-router-dom'
-import {v4 as uuidv4} from 'uuid'
-import Button from '../components/_UI/Button'
-import Modal from '../components/_UI/Modal'
-import {clearCart, removeProductFromCart} from '../redux/cart/cart.actions'
-import {clearOrder, createOrder} from '../redux/order/order.actions'
+import { useState } from "react"
+
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { useDispatch, useSelector } from "react-redux"
+import { useHistory } from "react-router-dom"
+import { v4 as uuidv4 } from "uuid"
+
+import Button from "../components/_UI/Button"
+import Modal from "../components/_UI/Modal"
+import { clearCart, removeProductFromCart } from "../redux/cart/cart.actions"
+import { clearOrder, createOrder } from "../redux/order/order.actions"
 
 const Cart = () => {
    const [showModal, setShowModal] = useState(false)
@@ -17,9 +19,12 @@ const Cart = () => {
       history.goBack()
    }
    const dispatch = useDispatch()
-   const cart = useSelector(({cart}) => cart)
-   const {currentUser} = useSelector(({auth}) => auth)
-   const {cartProducts, totalPrice} = cart
+   const cart = useSelector(({ cart }) => cart)
+   const { currentUser } = useSelector(({ auth }) => auth)
+   const {
+      cartProducts,
+      totalPrice
+   } = cart
 
    const onRemoveProductFromCart = id => {
       dispatch(removeProductFromCart(id))
@@ -28,12 +33,12 @@ const Cart = () => {
    const handleCreateOrder = () => {
       const timestamp = Date.now()
       const orderId = uuidv4()
-      const status = 'in progress'
+      const status = "in progress"
       dispatch(createOrder(cart, timestamp, orderId, currentUser, status))
       setShowModal(true)
       setTimeout(() => {
          setShowModal(false)
-         history.push('/')
+         history.push("/")
          dispatch(clearCart())
          dispatch(clearOrder())
       }, 500)
@@ -44,16 +49,18 @@ const Cart = () => {
          {
             showModal
                ? <div className="container-content">
-                  <Modal isError={false} top="5rem">Order was successfully created!</Modal>
+                  <Modal isError={false} top="5rem">Order was successfully
+                     created!</Modal>
                </div>
                : cartProducts.length === 0
-                  ? <h2 className="alert-warning p-5 text-center">The cart is empty...</h2>
+                  ? <h2 className="alert-warning p-5 text-center">The cart is
+                     empty...</h2>
                   : <div className="container-content">
                      <div className="cart">
                         <div className="cart-wrapper">
                            {
                               cartProducts && cartProducts.map(product => (
-                                 <div className="cart-item" key={uuidv4()}>
+                                 <div key={uuidv4()} className="cart-item">
                                     <div className="cart-item-name">
                                        <h5>{product.title}</h5>
                                        <div className="details">
@@ -86,7 +93,8 @@ const Cart = () => {
                                     <div className="cart-item-data">
                                        <p>Quantity: {product.quantity}</p>
                                        <p>Price: {product.price.toFixed(2)} EUR</p>
-                                       <button className="text-danger" onClick={() => onRemoveProductFromCart(product.id)}>
+                                       <button className="text-danger"
+                                               onClick={() => onRemoveProductFromCart(product.id)}>
                                           <FontAwesomeIcon icon={faTrashAlt}/>
                                        </button>
                                     </div>
@@ -99,7 +107,8 @@ const Cart = () => {
                         </div>
                         <div className="cart-proceed">
                            <Button onClick={goBackToPreviousPage}>Go Back</Button>
-                           <Button onClick={handleCreateOrder}>Create Order</Button>
+                           <Button onClick={handleCreateOrder}>Create
+                              Order</Button>
                         </div>
                      </div>
                   </div>

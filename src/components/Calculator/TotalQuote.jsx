@@ -1,8 +1,15 @@
-import PropTypes from 'prop-types'
-import Button from '../_UI/Button'
-import Spinner from '../_UI/Spinner'
+import PropTypes from "prop-types"
 
-const TotalQuote = ({quantity, price, loading, onAddProductToCart, isQuoteActive}) => {
+import Button from "../_UI/Button"
+import Spinner from "../_UI/Spinner"
+
+const TotalQuote = ({
+   quantity,
+   price,
+   loading,
+   onAddProductToCart,
+   isQuoteActive
+}) => {
 
    const handleAddToCart = () => {
       if (isQuoteActive) {
@@ -30,7 +37,7 @@ const TotalQuote = ({quantity, price, loading, onAddProductToCart, isQuoteActive
             {
                loading
                   ? <div className="quote-item">
-                     <Spinner width={50} height={50}/>
+                     <Spinner height={50} width={50}/>
                   </div>
                   : <div className="quote-item">
                      <p>Total</p>
@@ -45,7 +52,8 @@ const TotalQuote = ({quantity, price, loading, onAddProductToCart, isQuoteActive
                   </div>
             }
          </>
-         <Button disabled={!(!!quantity && price !== 0)} onClick={handleAddToCart}>
+         <Button disabled={!(!!quantity && price !== 0)}
+                 onClick={handleAddToCart}>
             Add to Cart
          </Button>
       </div>
@@ -54,7 +62,6 @@ const TotalQuote = ({quantity, price, loading, onAddProductToCart, isQuoteActive
 
 TotalQuote.propTypes = {
    quantity: PropTypes.string,
-   // price: PropTypes.number,
    loading: PropTypes.bool
 }
 

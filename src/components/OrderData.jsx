@@ -1,13 +1,23 @@
-import {v4 as uuidv4} from 'uuid'
+import { v4 as uuidv4 } from "uuid"
 
-const OrderData = ({product}) => {
+const OrderData = ({ product }) => {
 
-   const {title, productType, price, markupType, id, quantity, ...otherData} = product
+   const {
+      title,
+      productType,
+      price,
+      markupType,
+      quantity,
+      ...otherData
+   } = product
 
    const sortObjects = (productData) => {
       return Object.entries(productData)
          .sort()
-         .reduce((r, [k, v]) => ({...r, [k]: v}), {})
+         .reduce((r, [k, v]) => ({
+            ...r,
+            [k]: v
+         }), {})
    }
 
    let dataFromKey = []

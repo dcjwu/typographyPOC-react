@@ -1,4 +1,4 @@
-import TotalQuote from '../TotalQuote'
+import TotalQuote from "../TotalQuote"
 
 const EnvelopesCalculator = () => {
    return (
