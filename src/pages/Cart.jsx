@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -8,11 +8,13 @@ import { v4 as uuidv4 } from "uuid"
 
 import Button from "../components/_UI/Button"
 import Modal from "../components/_UI/Modal"
+import FileUpload from "../components/FileUpload"
 import { clearCart, removeProductFromCart } from "../redux/cart/cart.actions"
 import { clearOrder, createOrder } from "../redux/order/order.actions"
 
 const Cart = () => {
    const [showModal, setShowModal] = useState(false)
+   const [orderId, setOrderId] = useState(null)
 
    const history = useHistory()
    const goBackToPreviousPage = () => {
@@ -26,13 +28,18 @@ const Cart = () => {
       totalPrice
    } = cart
 
+   useEffect(() => {
+      if (cartProducts.length) {
+         setOrderId(uuidv4())
+      }
+   }, [])
+
    const onRemoveProductFromCart = id => {
       dispatch(removeProductFromCart(id))
    }
 
    const handleCreateOrder = () => {
       const timestamp = Date.now()
-      const orderId = uuidv4()
       const status = "in progress"
       dispatch(createOrder(cart, timestamp, orderId, currentUser, status))
       setShowModal(true)
@@ -49,10 +56,9 @@ const Cart = () => {
          {
             showModal
                ? <div className="container-content">
-                  <Modal isError={false} top="5rem">Order was successfully
-                     created!</Modal>
+                  <Modal isError={false} top="5rem">Order was successfully created!</Modal>
                </div>
-               : cartProducts.length === 0
+               : !cartProducts.length
                   ? <h2 className="alert-warning p-5 text-center">The cart is
                      empty...</h2>
                   : <div className="container-content">
@@ -105,10 +111,10 @@ const Cart = () => {
                         <div className="cart-total alert-info p-2">
                            <p>Total: {totalPrice.toFixed(2)} EUR</p>
                         </div>
+                        <FileUpload orderId={orderId}/>
                         <div className="cart-proceed">
                            <Button onClick={goBackToPreviousPage}>Go Back</Button>
-                           <Button onClick={handleCreateOrder}>Create
-                              Order</Button>
+                           <Button onClick={handleCreateOrder}>Create Order</Button>
                         </div>
                      </div>
                   </div>

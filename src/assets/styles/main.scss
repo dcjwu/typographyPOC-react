@@ -10,6 +10,7 @@
 @import "./blocks/product";
 @import "./blocks/admin";
 @import "./blocks/modal";
+@import "./blocks/file";
 
 .container-content {
   margin: 0 auto;
@@ -62,3 +63,4 @@ small {
 .card > a:hover + .card-body > a {
   color: $blue;
 }
+
