@@ -30,7 +30,7 @@ const LabelsCalculator = () => {
    const [cartProduct, setCartProducts] = useState({})
 
    const [loading, setLoading] = useState(false)
-   const [modalSuccess, setModalSuccess] = useState(false)
+   const [showModal, setShowModal] = useState(false)
    const [requestError, setRequestError] = useState(false)
 
    const onMarkupTypeChange = e => setMarkupType(e.target.value)
@@ -66,8 +66,9 @@ const LabelsCalculator = () => {
          })
          .catch(error => {
             setPrice(0)
-            setRequestError(error)
+            setRequestError(true)
             setLoading(false)
+            setShowModal(true)
          })
    }
 
@@ -109,33 +110,36 @@ const LabelsCalculator = () => {
       setPrice(0)
    }
 
+   const handleCloseModal = () => {
+      setShowModal(false)
+      setRequestError(false)
+   }
+
    const onAddProductToCart = () => {
       dispatch(setProductsToCart(cartProduct))
       onAddToCartDataReset()
-      setModalSuccess(true)
-      setTimeout(() => {
-         setModalSuccess(false)
-      }, 500)
+      setShowModal(true)
    }
 
    return (
       <div className="calc">
          {
-            modalSuccess
-               ? <Modal isError={false} top="-20rem">Product added to
+            showModal
+               ? <Modal handleCloseModal={handleCloseModal} isError={false} showModal={showModal}
+                        top="-20rem">Product added to
                   cart!</Modal>
                : null
          }
          {
             requestError
-               ? <Modal isError={true} top="-20rem">Error. Please, contact
-                  Admin.</Modal>
+               ? <Modal handleCloseModal={handleCloseModal} isError={true} showModal={showModal}
+                        top="-20rem">Error. Please, contact Admin.</Modal>
                : null
          }
          <form onSubmit={onSubmitForm}>
             <div className="calc-markup">
                <h2>Please, choose markup:</h2>
-               <select value={markupType} onChange={onMarkupTypeChange}>
+               <select disabled={loading} value={markupType} onChange={onMarkupTypeChange}>
                   <option disabled hidden value="">- Choose -</option>
                   <option value="0">0</option>
                   <option value="1">1</option>
@@ -147,9 +151,11 @@ const LabelsCalculator = () => {
                   Label Size (mm):
                </div>
                <div className="calc-row-option--input">
-                  <input min={10} placeholder="X" type="number"
+                  <input disabled={loading} min={10} placeholder="X"
+                         type="number"
                          value={labelSizeX} onChange={onLabelSizeXChange}/>
-                  <input min={10} placeholder="Y" type="number"
+                  <input disabled={loading} min={10} placeholder="Y"
+                         type="number"
                          value={labelSizeY} onChange={onLabelSizeYChange}/>
                </div>
             </div>
@@ -158,7 +164,7 @@ const LabelsCalculator = () => {
                   Material:
                </div>
                <div className="calc-row-option--select">
-                  <select value={material} onChange={onMaterialChange}>
+                  <select disabled={loading} value={material} onChange={onMaterialChange}>
                      <option disabled hidden value="">- Choose -</option>
                      <option value="film">Film</option>
                      <option value="gloss">Gloss</option>
@@ -172,7 +178,7 @@ const LabelsCalculator = () => {
                   Laminated:
                </div>
                <div className="calc-row-option--select">
-                  <select value={laminated} onChange={onLaminatedChange}>
+                  <select disabled={loading} value={laminated} onChange={onLaminatedChange}>
                      <option disabled hidden value="">- Choose -</option>
                      <option value="0">No</option>
                      <option value="1">Yes</option>
@@ -184,7 +190,7 @@ const LabelsCalculator = () => {
                   Cutting:
                </div>
                <div className="calc-row-option--select">
-                  <select value={cutting} onChange={onCuttingChange}>
+                  <select disabled={loading} value={cutting} onChange={onCuttingChange}>
                      <option disabled hidden value="">- Choose -</option>
                      <option value="0">No</option>
                      <option value="1">Yes</option>
@@ -196,7 +202,7 @@ const LabelsCalculator = () => {
                   Rotation:
                </div>
                <div className="calc-row-option--select">
-                  <select value={rotation} onChange={onRotationChange}>
+                  <select disabled={loading} value={rotation} onChange={onRotationChange}>
                      <option disabled hidden value="">- Choose -</option>
                      <option value="0">No</option>
                      <option value="1">Yes</option>
@@ -208,7 +214,8 @@ const LabelsCalculator = () => {
                   Quantity:
                </div>
                <div className="calc-row-option--input--q">
-                  <input min={1} placeholder={"Quantity"} type="number"
+                  <input disabled={loading} min={1} placeholder={"Quantity"}
+                         type="number"
                          value={quantity} onChange={onQuantityChange}/>
                </div>
             </div>

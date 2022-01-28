@@ -13,6 +13,9 @@
     justify-content: space-between;
     background-color: #f5f5f5;
     position: relative;
+    &:last-child {
+      margin-bottom: 0;
+    }
     @include breakpoint($bp576) {
       padding: 1rem;
     }
@@ -116,6 +119,7 @@
   }
 
   &-total {
+    margin-top: 2rem;
     display: flex;
     justify-content: center;
     border-radius: 1rem;

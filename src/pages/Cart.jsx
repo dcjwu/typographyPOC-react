@@ -3,12 +3,12 @@ import { useEffect, useState } from "react"
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useDispatch, useSelector } from "react-redux"
-import { useHistory } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import { v4 as uuidv4 } from "uuid"
 
 import Button from "../components/_UI/Button"
 import Modal from "../components/_UI/Modal"
-import FileUpload from "../components/FileUpload"
+import FileUpload from "../components/Upload/FileUpload"
 import { clearCart, removeProductFromCart } from "../redux/cart/cart.actions"
 import { clearOrder, createOrder } from "../redux/order/order.actions"
 
@@ -38,17 +38,19 @@ const Cart = () => {
       dispatch(removeProductFromCart(id))
    }
 
+   const handleCloseModal = () => {
+      setShowModal(false)
+   }
+
    const handleCreateOrder = () => {
       const timestamp = Date.now()
       const status = "in progress"
       dispatch(createOrder(cart, timestamp, orderId, currentUser, status))
       setShowModal(true)
-      setTimeout(() => {
-         setShowModal(false)
-         history.push("/")
+      if (!showModal) {
          dispatch(clearCart())
          dispatch(clearOrder())
-      }, 500)
+      }
    }
 
    return (
@@ -56,11 +58,17 @@ const Cart = () => {
          {
             showModal
                ? <div className="container-content">
-                  <Modal isError={false} top="5rem">Order was successfully created!</Modal>
+                  <Modal handleCloseModal={handleCloseModal} isError={false} showModal={showModal}
+                         top="5rem">Order was successfully created!</Modal>
                </div>
                : !cartProducts.length
-                  ? <h2 className="alert-warning p-5 text-center">The cart is
-                     empty...</h2>
+                  ? <div className="alert-warning p-5 text-center">
+                     <h2>The cart is empty...</h2>
+                     <div className="d-flex gap-5 align-items-center justify-content-center">
+                        <Link className="btn btn-outline-warning mt-5" to="/">Home</Link>
+                        <Link className="btn btn-outline-warning mt-5" to="/shop">Shop</Link>
+                     </div>
+                  </div>
                   : <div className="container-content">
                      <div className="cart">
                         <div className="cart-wrapper">
@@ -108,10 +116,10 @@ const Cart = () => {
                               ))
                            }
                         </div>
+                        <FileUpload orderId={orderId}/>
                         <div className="cart-total alert-info p-2">
                            <p>Total: {totalPrice.toFixed(2)} EUR</p>
                         </div>
-                        <FileUpload orderId={orderId}/>
                         <div className="cart-proceed">
                            <Button onClick={goBackToPreviousPage}>Go Back</Button>
                            <Button onClick={handleCreateOrder}>Create Order</Button>
