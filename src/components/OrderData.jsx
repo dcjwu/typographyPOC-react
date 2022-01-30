@@ -8,6 +8,7 @@ const OrderData = ({ product }) => {
       price,
       markupType,
       quantity,
+      id,
       ...otherData
    } = product
 

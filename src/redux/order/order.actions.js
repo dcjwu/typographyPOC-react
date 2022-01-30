@@ -29,8 +29,8 @@ const setDataLoaded = isLoaded => ({
 
 export const getOrdersFromDB = filter => async dispatch => {
    dispatch(setDataLoaded(false))
-   let ref = await firestore.collection("orders").orderBy("dateCreated")
-   if (filter) ref = await firestore.collection("orders").orderBy("dateCreated").where("orderStatus", "==", filter)
+   let ref = await firestore.collection("orders").orderBy("dateCreated", "desc")
+   if (filter) ref = await firestore.collection("orders").orderBy("dateCreated", "desc").where("orderStatus", "==", filter)
    ref.get()
       .then(products => {
          let readyData = []

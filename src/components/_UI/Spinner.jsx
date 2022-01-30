@@ -2,10 +2,11 @@ import PropTypes from "prop-types"
 
 const Spinner = ({
    width,
-   height
+   height,
+   absolute
 }) => {
    return (
-      <div className="d-flex justify-content-center">
+      <div className={`d-flex justify-content-center ${absolute ? "position-absolute" : ""}`}>
          <svg enableBackground="new 0 0 0 0"
               id="L9" style={{
                  width: width === undefined ? 200 : width,

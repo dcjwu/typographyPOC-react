@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 
 import axios from "axios"
 
@@ -7,16 +7,15 @@ import Modal from "../_UI/Modal"
 import UploadProgress from "./UploadProgress"
 
 const FileUpload = ({ orderId }) => {
-
    console.log(orderId)
-
    const fileInput = useRef()
-   const [fileUploadError, setFileUploadError] = useState(null)
    const [showModal, setShowModal] = useState(false)
    const [uploadPercentage, setUploadPercentage] = useState(0)
    const [uploadDesign, setUploadDesign] = useState(false)
    const [loading, setLoading] = useState(false)
    const [isFileUploaded, setIsFileUploaded] = useState(false)
+   const [fileUploadError, setFileUploadError] = useState(null)
+   const [fileValidationError, setFileValidationError] = useState(false)
 
    const handleDesignRequired = () => {
       setUploadDesign(prev => !prev)
@@ -40,23 +39,35 @@ const FileUpload = ({ orderId }) => {
       })
          .then(res => {
             if (res.status === 200) {
-               setIsFileUploaded(true)  
+               setIsFileUploaded(true)
             } else {
                setFileUploadError("Unexpected Error")
             }
          })
          .catch(err => {
-            setFileUploadError(err.response.data)
+            if (err.response) {
+               setFileUploadError(err.response.data)
+            } else {
+               setFileUploadError(err.message)
+            }
             setShowModal(true)
             fileInput.current.value = ""
          })
    }
 
    const handleFileUpload = async e => {
-      const formData = new FormData()
-      formData.append("orderId", orderId)
-      formData.append("pdf-file", e.target.files[0])
-      await uploadFile(formData)
+      const currentFile = e.target.files[0]
+      if (currentFile.type === "application/pdf") {
+         setFileValidationError(false)
+         const formData = new FormData()
+         formData.append("orderId", orderId)
+         formData.append("pdf-file", currentFile)
+         await uploadFile(formData)
+      } else {
+         setFileValidationError(true)
+         setShowModal(true)
+         fileInput.current.value = ""
+      }
    }
 
    const deleteFile = async data => {
@@ -66,24 +77,16 @@ const FileUpload = ({ orderId }) => {
                setUploadPercentage(0)
                setLoading(false)
                setIsFileUploaded(false)
+               fileInput.current.value = ""
             }
          })
          .catch(err => {
-            setFileUploadError(`Server Error ${err.response.status}`)
+            setFileUploadError(err.message)
             setShowModal(true)
             fileInput.current.value = ""
          })
    }
-   
-   const deleteFileOnUnmount = async () => {
-      console.log("rest")
-      const formData = new FormData()
-      formData.append("orderId", orderId)
-      await axios.post("http://localhost:8000/delete", formData, { headers: { "Content-Type": "multipart/form-data" } })
-         .then(res => console.log(res))
-         .catch(err => console.log(err))
-   }
-   
+
    const handleFileDelete = async orderId => {
       const formData = new FormData()
       formData.append("orderId", orderId)
@@ -105,6 +108,12 @@ const FileUpload = ({ orderId }) => {
             uploadDesign && <>
                <div className="file">
                   {
+                     fileValidationError && <Modal handleCloseModal={handleCloseModal} isError={true} showModal={showModal}
+                                                   top="5rem">
+                        Please, upload .pdf file
+                     </Modal>
+                  }
+                  {
                      fileUploadError && <Modal handleCloseModal={handleCloseModal} isError={true} showModal={showModal}
                                                top="5rem">
                         {fileUploadError}
@@ -116,7 +125,8 @@ const FileUpload = ({ orderId }) => {
                             name="pdf-file" type="file" onChange={handleFileUpload}/>
                      <p>Upload</p>
                   </label>
-                  <Button additionalClass={`btn btn-outline-danger ${!isFileUploaded ? " disabled" : ""}`} onClick={() => handleFileDelete(orderId)}>
+                  <Button additionalClass={`btn btn-outline-danger ${!isFileUploaded ? " disabled" : ""}`}
+                          onClick={() => handleFileDelete(orderId)}>
                      Delete
                   </Button>
                </div>
