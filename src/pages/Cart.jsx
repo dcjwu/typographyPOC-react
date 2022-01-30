@@ -63,7 +63,7 @@ const Cart = () => {
       setLoading(true)
       const formData = new FormData()
       formData.append("orderId", orderId)
-      axios.post("http://localhost:8000/save", formData, { headers: { "Content-Type": "multipart/form-data" } })
+      axios.post("https://paper-demo-file-upload.herokuapp.com/save", formData, { headers: { "Content-Type": "multipart/form-data" } })
          .then(() => {
             setShowSuccessModal(true)
             setLoading(false)

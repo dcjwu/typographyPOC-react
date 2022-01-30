@@ -30,7 +30,7 @@ const FileUpload = ({ orderId }) => {
    }
 
    const uploadFile = async data => {
-      await axios.post("http://localhost:8000/upload", data, {
+      await axios.post("https://paper-demo-file-upload.herokuapp.com/upload", data, {
          headers: { "Content-Type": "multipart/form-data" },
          onUploadProgress: progressEvent => {
             setLoading(true)
@@ -71,7 +71,7 @@ const FileUpload = ({ orderId }) => {
    }
 
    const deleteFile = async data => {
-      await axios.post("http://localhost:8000/delete", data, { headers: { "Content-Type": "multipart/form-data" } })
+      await axios.post("https://paper-demo-file-upload.herokuapp.com/delete", data, { headers: { "Content-Type": "multipart/form-data" } })
          .then(res => {
             if (res.status === 200) {
                setUploadPercentage(0)
