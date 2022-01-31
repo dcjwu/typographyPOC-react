@@ -5,8 +5,9 @@ import { Link } from "react-router-dom"
 const Cart = () => {
    return (
       <Link to="/cart">
-         <button className="btn btn-cart btn-outline-primary">
+         <button className="btn btn-cart">
             <FontAwesomeIcon icon={faShoppingCart}/>
+            <span>Cart</span>
          </button>
       </Link>
    )

@@ -14,13 +14,13 @@ const Modal = ({
            style={{ top: top }}>
          {
             !isError
-               ? <div className="alert-success p-5 w-100 text-center">
+               ? <div className="alert-success w-100 text-center notification-green">
                   <h1>{children}</h1>
-                  <p className="btn btn-outline-success mt-5 px-3 py-2" onClick={handleCloseModal}>CLOSE</p>
+                  <p className="btn btn-modal success btn-outline-success mt-5 px-3 py-2" onClick={handleCloseModal}>CLOSE</p>
                </div>
-               : <div className="alert-danger p-5 w-100 text-center">
+               : <div className="alert-danger w-100 text-center notification-red">
                   <h1>{children}</h1>
-                  <p className="btn btn-outline-danger mt-5 px-3 py-2" onClick={handleCloseModal}>CLOSE</p>
+                  <p className="btn btn-modal error btn-outline-danger mt-5 px-3 py-2" onClick={handleCloseModal}>CLOSE</p>
                </div>
          }
       </div>

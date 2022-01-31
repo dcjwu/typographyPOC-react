@@ -89,7 +89,8 @@
       font-size: 3rem;
       transition: color .1s linear;
 
-      &:hover {
+      &:hover,
+      &:focus {
         color: $blue;
       }
     }
@@ -111,7 +112,9 @@
       background-color: #bdbdbd;
       transition: all .2s linear;
 
-      &:hover {
+      &:hover, {
+      &:focus {
+      }
         color: #bdbdbd;
         background-color: black;
       }

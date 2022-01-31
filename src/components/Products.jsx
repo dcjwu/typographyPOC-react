@@ -30,9 +30,12 @@ const Products = () => {
                      to={`${url}/${product.category}/${product.id}`}>
                      <div className="card">
                         <img alt="Product" className="card-img-top"
-                          src={product.imageUrl}/>
+                          src={product.images[0]}/>
                         <div className="card-body">
-                           <span className="card-text text-center link">{product.title}</span>
+                           <div className="card-text-custom">
+                              <span className="card-text link">{product.title}</span>
+                              <small className="link">from €0.05</small>
+                           </div>
                         </div>
                      </div>
                   </Link>

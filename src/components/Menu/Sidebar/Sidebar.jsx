@@ -31,7 +31,7 @@ const Sidebar = ({
 
    return (
       <div ref={outsideClickRef}
-           className={classNames("sidebar bg-light text-center p-3", { "active": toggleNavStatus })}>
+           className={classNames("sidebar bg-white text-center", { "active": toggleNavStatus })}>
          <SidebarLinks handleClickInside={handleClickInside}
                        handleLogoutUser={handleLogoutUser}/>
       </div>

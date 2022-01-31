@@ -6,11 +6,28 @@
     margin: 0 auto;
     padding: 4rem;
     width: 80%;
-    border-radius: 4rem;
-    background-color: #efefef;
     @include breakpoint($bp576) {
       padding: 2rem;
       width: 100%;
     }
   }
+  &-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    & span {
+      text-align: right;
+      @include breakpoint($bp432) {
+        font-size: 1.8rem;
+      }
+    }
+  }
+  &-control {
+    width: 70%;
+  }
+}
+
+.credentials {
+  background-color: rgba($blueLight, .5);
 }

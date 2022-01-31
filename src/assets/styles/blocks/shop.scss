@@ -1,14 +1,49 @@
+@import '../vendor/mixins';
+@import "../vendor/vars";
+
 .shop {
-  margin: 3rem auto 0 auto;
+  margin: 1.5rem auto 0 auto;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 4rem;
   flex-wrap: wrap;
+  @include breakpoint($bp960) {
+    gap: 3rem;
+  }
+  @include breakpoint($bp432) {
+    gap: 2rem;
+  }
   &-card-item {
     & .card {
-      width: 18rem;
+      width: 20rem;
+      @include breakpoint($bp960) {
+        width: 15rem;
+      }
+    }
+  }
+}
+
+.card {
+  border: none;
+  &-body {
+    font-family: $fontSourceSans;
+    padding: .2rem 0 0 0;
+    & small {
+      margin-top: -.5rem;
+      text-decoration: underline;
+      font-style: italic;
+      text-align: left;
+    }
+  }
+  &-text {
+    display: block;
+    @include breakpoint($bp576) {
+      font-size: 1.85rem;
+    }
+    &-custom {
+      margin-left: 1rem;
     }
   }
 }

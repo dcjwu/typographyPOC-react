@@ -46,7 +46,7 @@ const Login = () => {
             !isUserAuthLoaded
                ? <div className="container-content">
                   <div className="login-text">
-                     <div className="d-flex align-items-center justify-content-center gap-5 alert-info p-4">
+                     <div className="d-flex align-items-center justify-content-center gap-5 p-4 credentials">
                         <small>
                            <b>ADMIN</b>
                            <p>email: a@d.min</p>
@@ -61,20 +61,22 @@ const Login = () => {
                   </div>
                   {
                      authError &&
-                     <h5 className="mt-3 text-center text-danger">{authError}</h5>
+                     <h5 className="mt-3 text-center notification-red">{authError}</h5>
                   }
                   <form className="mt-3 form-custom" onSubmit={handleFormSubmit}>
                      <div className="form-group mb-5">
+                        <span>Email</span>
                         <Input placeholder="Email address..." type="email"
                                value={email}
                                onUpdateValue={onInputEmail}/>
                      </div>
                      <div className="form-group mb-5">
+                        <span>Password</span>
                         <Input placeholder="Password..." type="password"
                                value={password}
                                onUpdateValue={onInputPassword}/>
                      </div>
-                     <Button type="submit">Submit</Button>
+                     <Button type="submit">Sign In</Button>
                   </form>
                </div>
                : <Spinner/>

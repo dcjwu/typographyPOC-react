@@ -11,12 +11,31 @@
 @import "./blocks/admin";
 @import "./blocks/modal";
 @import "./blocks/file";
+@import "./blocks/carousel";
 
 .container-content {
   margin: 0 auto;
   padding: 0 2.5rem;
-  max-width: 80rem;
+  max-width: 100rem;
   position: relative;
+  &.product-page {
+    & h2 {
+      font-family: $fontSourceSans;
+      text-transform: capitalize;
+      font-size: 2.5rem;
+    }
+    & hr {
+      width: 100%;
+      border-top: 2px solid #c2c2c2;
+    }
+  }
+}
+
+.category-name {
+  margin-top: 1.5rem;
+  font-family: $fontSourceSans;
+  font-size: 2.5rem;
+  text-transform: capitalize;
 }
 
 .main {
@@ -33,6 +52,7 @@
   @include breakpoint($bp576) {
     font-size: 3rem;
   }
+
   &--shop {
     text-transform: capitalize;
   }
@@ -43,12 +63,17 @@
   color: inherit;
   transition: color .2s ease-in-out;
   cursor: pointer;
-  &:hover {
+
+  &:hover,
+  &:focus {
     color: $blue;
   }
+
   &.available {
-    color: #32bb32;
-    &:hover {
+    color: $green;
+
+    &:hover,
+    &:focus {
       color: $blue;
     }
   }
@@ -60,7 +85,81 @@ small {
   text-align: center;
 }
 
-.card > a:hover + .card-body > a {
+.card > a:hover + .card-body > a,
+.card > a:focus + .card-body > a {
   color: $blue;
+}
+
+.banner {
+  position: relative;
+  font-family: $fontSourceSans;
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    background-image: linear-gradient(180deg, rgba(244, 244, 244, 0.5) 0%, rgba(238, 238, 238, 0.5) 100%);
+    mix-blend-mode: normal;
+    @include breakpoint($bp576) {
+      background-image: linear-gradient(180deg, rgba(244, 244, 244, 0.7) 0%, rgba(238, 238, 238, 0.7) 100%);
+    }
+  }
+
+  & img {
+    color: #000;
+    width: 100%;
+    height: 30rem;
+    object-fit: cover;
+    @include breakpoint($bp1035) {
+      height: 25rem;
+    }
+    @include breakpoint($bp576) {
+      height: 20rem;
+    }
+  }
+
+  &-text {
+    width: calc(100% - #{$sideBarWidth});
+    position: absolute;
+    top: 50%;
+    left: 10rem;
+    transform: translateY(-50%);
+    z-index: 999;
+    @include breakpoint($bp576) {
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    & h1 {
+      width: 70%;
+      font-size: 4rem;
+      @include breakpoint($bp1035) {
+        font-size: 3rem;
+      }
+      @include breakpoint($bp576) {
+        width: 100%;
+      }
+    }
+
+    & p {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+.notification {
+  &-red {
+    background-color: rgba($red, .8);
+    color: white;
+    padding: 2rem;
+  }
+  &-green {
+    background-color: rgba($green, .9);
+    color: white;
+    padding: 2rem;
+  }
 }
 

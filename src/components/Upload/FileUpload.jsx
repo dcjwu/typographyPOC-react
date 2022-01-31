@@ -93,9 +93,6 @@ const FileUpload = ({ orderId }) => {
       await deleteFile(formData)
    }
 
-   //TODO: 1. Validation for .pdf.
-   //TODO: 2. If validation passed setState to handle disabled buttons + another color or whatever.
-
    return (
       <div className="mt-5">
          <div className="form-check form-switch">

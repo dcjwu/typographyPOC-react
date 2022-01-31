@@ -1,12 +1,26 @@
 $mainFZ: 2rem;
 $mainFZ767: 1.6rem;
 
-$navbarHeight: 9rem;
-$sideBarWidth: 25%;
+$navbarHeight: 8rem;
+$navbarMarginB: 2rem;
+$navbarPT: 1.5rem;
+$navbarPB: 1.5rem;
+$sideBarWidth: 24%;
 
-$blue: #0d6efd;
+$black: #4c4c4c;
+$blue: #116fcc;
+$blueLight: #72a6d5;
+$red: #da4167;
+$green: #20a372;
+
 
 $bp1035: 1035px;
+$bp960: 960px;
 $bp767: 767px;
+$bp600: 600px;
 $bp576: 576px;
 $bp432: 432px;
+
+$fontMontserrat: 'Montserrat', sans-serif;
+$fontOpenSans: 'Open Sans', sans-serif;
+$fontSourceSans: 'Source Sans Pro', sans-serif;

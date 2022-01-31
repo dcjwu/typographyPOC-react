@@ -64,7 +64,7 @@ const LabelsCalculator = () => {
                price
             }))
          })
-         .catch(error => {
+         .catch(() => {
             setPrice(0)
             setRequestError(true)
             setLoading(false)
@@ -123,17 +123,18 @@ const LabelsCalculator = () => {
 
    return (
       <div className="calc">
+
          {
             showModal
                ? <Modal handleCloseModal={handleCloseModal} isError={false} showModal={showModal}
-                        top="-20rem">Product added to
+                        top="0">Product added to
                   cart!</Modal>
                : null
          }
          {
             requestError
                ? <Modal handleCloseModal={handleCloseModal} isError={true} showModal={showModal}
-                        top="-20rem">Error. Please, contact Admin.</Modal>
+                        top="0">Error. Please, contact Admin.</Modal>
                : null
          }
          <form onSubmit={onSubmitForm}>
@@ -145,7 +146,7 @@ const LabelsCalculator = () => {
                   <option value="1">1</option>
                </select>
             </div>
-            <h3>Configure & Price Your Label</h3>
+            <h3>Configure & Price</h3>
             <div className="calc-row">
                <div className="calc-row-name">
                   Label Size (mm):

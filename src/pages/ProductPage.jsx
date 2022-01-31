@@ -1,10 +1,13 @@
 import { useEffect } from "react"
 
+import { faCheck } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 
 import Spinner from "../components/_UI/Spinner"
 import Calculator from "../components/Calculator/Calculator"
+import GalleryCarousel from "../components/GalleryCarousel"
 import { clearProductById, getProductById } from "../redux/products/products.actions"
 
 const ProductPage = () => {
@@ -27,23 +30,40 @@ const ProductPage = () => {
       <>
          {
             !currentUser
-               ? <h1 className="alert-danger text-center p-5">Please, Sign In to
+               ? <h1 className="alert-danger notification-red text-center">Please, Sign In to
                   view this Page!</h1>
                : <div className="product">
                   {
                      !isLoaded
                         ? <Spinner/>
                         : productById &&
-                        <div className="container-content">
-                           <div className="product-header">
-                              <div className="product-text">
-                                 <h2>{productById.title}</h2>
-                                 <p><small className="mt-4">Description...</small>
-                                 </p>
+                        <div className="container-content product-page">
+                           <h2>{productById.title}</h2>
+                           <hr/>
+                           <div className="product-wrapper">
+                              <div className="product-header">
+                                 <GalleryCarousel images={productById.images}/>
+                                 <ul>
+                                    <li>
+                                       <FontAwesomeIcon icon={faCheck}/>
+                                       <small>Additional Description...</small>
+                                    </li>
+                                    <li>
+                                       <FontAwesomeIcon icon={faCheck}/>
+                                       <small>Additional Description...</small>
+                                    </li>
+                                    <li>
+                                       <FontAwesomeIcon icon={faCheck}/>
+                                       <small>Additional Description...</small>
+                                    </li>
+                                    <li>
+                                       <FontAwesomeIcon icon={faCheck}/>
+                                       <small>Additional Description...</small>
+                                    </li>
+                                 </ul>
                               </div>
-                              <img alt="Product" src={productById.imageUrl}/>
+                              <Calculator calculatorType={productById.calculator}/>
                            </div>
-                           <Calculator calculatorType={productById.calculator}/>
                         </div>
                   }
                </div>

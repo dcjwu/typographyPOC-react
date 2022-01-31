@@ -2,26 +2,17 @@
 @import "../vendor/mixins";
 
 .home {
-  & img {
-    width: 100%;
-    height: 22rem;
-    object-fit: cover;
-  }
-
   &-text-container {
-    margin: 2rem auto 0 auto;
+    margin: 1rem auto 0 auto;
     padding: 2rem;
-    width: 80%;
-    background-color: #e7e7e7;
-    border-radius: 3rem;
-    @include breakpoint($bp576) {
-      padding: 1rem;
+    background-color: #eeeeee;
+    border-radius: 1rem;
+    width: 75%;
+    @include breakpoint($bp767) {
       width: 95%;
     }
-  }
-
-  & dd {
-    margin-left: 2rem;
-    font-size: 1.8rem;
+    & dl {
+      font-size: 1.8rem;
+    }
   }
 }

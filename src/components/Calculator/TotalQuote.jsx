@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react"
+
 import PropTypes from "prop-types"
 
 import Button from "../_UI/Button"
@@ -10,6 +12,7 @@ const TotalQuote = ({
    onAddProductToCart,
    isQuoteActive
 }) => {
+   const [priceForEach, setPriceForEach] = useState("")
 
    const handleAddToCart = () => {
       if (isQuoteActive) {
@@ -17,41 +20,54 @@ const TotalQuote = ({
       }
    }
 
+   useEffect(() => {
+      if (price) {
+         setPriceForEach((price / quantity).toFixed(2))
+      }
+   }, [price])
+
    return (
       <div className="quote">
-         <div className="quote-item">
-            <p>Quantity</p>
-            <p>
-               {
-                  quantity
-                     ? quantity
-                     : 0
-               }
-            </p>
-         </div>
-         <div className="quote-item">
-            <p>Delivery</p>
-            <p>3 Jan</p>
-         </div>
-         <>
-            {
-               loading
-                  ? <div className="quote-item">
-                     <Spinner height={50} width={50}/>
+         <div className="quote-wrapper">
+            <div className="quote-top">
+               <div className="quote-item">
+                  <p>Quantity</p>
+                  <p>
+                     {
+                        quantity
+                           ? quantity
+                           : 0
+                     }
+                  </p>
+               </div>
+               <div className="quote-item">
+                  <p>Delivery</p>
+                  <p>3 Jan</p>
+               </div>
+            </div>
+            <div className="quote-bottom">
+               <div className="quote-item total">
+                  <p className="cost">Printing Cost</p>
+                  <div className="cost-price">
+                     {
+                        loading
+                           ? <Spinner height={75} width={75}/>
+                           : <>
+                              <p className="cost-total">
+                                 €
+                                 {
+                                    price
+                                       ? price
+                                       : 0
+                                 }
+                              </p>
+                              <small>€{priceForEach ? priceForEach : 0} for each</small>
+                           </>
+                     }
                   </div>
-                  : <div className="quote-item">
-                     <p>Total</p>
-                     <p>
-                        {
-                           price
-                              ? price
-                              : 0
-                        }
-                        &nbsp;EUR
-                     </p>
-                  </div>
-            }
-         </>
+               </div>
+            </div>
+         </div>
          <Button disabled={!(!!quantity && price !== 0)}
                  onClick={handleAddToCart}>
             Add to Cart

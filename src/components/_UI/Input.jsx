@@ -7,7 +7,7 @@ const Input = ({
    onUpdateValue
 }) => {
    return (
-      <input className="form-control me-2"
+      <input className="form-control"
              placeholder={placeholder}
              type={type}
              value={value}

@@ -16,7 +16,7 @@ const Navbar = ({
    } = useSelector(({ auth }) => auth)
 
    return (
-      <div className="navbar bg-light navbar--custom">
+      <div className="navbar bg-white navbar--custom">
          <div className="container">
             <div className={classNames("nav-icon", { "active": toggleNavStatus })}
                onClick={!toggleNavStatus ? () => toggleNavHandler(true) : null}
@@ -26,23 +26,24 @@ const Navbar = ({
                <span/>
             </div>
             <Logo/>
-            <NavLink className="link shop-link" to="/shop">
-               Shop
-            </NavLink>
-            {
-               !isAdmin
-                  ? null
-                  : <NavLink className="link shop-link" to="/admin">Admin
-                     Panel</NavLink>
-            }
-            {
-               !currentUser
-                  ? <NavLink className="link shop-link"
-                             to="/login">LOGIN</NavLink>
-                  : <span className="link shop-link"
-                          onClick={handleLogoutUser}>LOGOUT</span>
-            }
-            <Cart/>
+            <div className="navbar-right">
+               <NavLink className="link shop-link" to="/shop">
+                  Shop
+               </NavLink>
+               {
+                  !isAdmin
+                     ? null
+                     : <NavLink className="link shop-link" to="/admin">Admin</NavLink>
+               }
+               {
+                  !currentUser
+                     ? <NavLink className="link shop-link"
+                                to="/login">Login</NavLink>
+                     : <span className="link shop-link"
+                             onClick={handleLogoutUser}>Logout</span>
+               }
+               <Cart/>
+            </div>
          </div>
       </div>
    )

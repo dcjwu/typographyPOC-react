@@ -5,6 +5,7 @@ import { Route, Switch } from "react-router-dom"
 
 import AdminRoute from "./components/_routes/AdminRoute"
 import PublicRoute from "./components/_routes/PublicRoute"
+import Banner from "./components/Banner"
 import Menu from "./components/Menu/Menu"
 import Admin from "./pages/Admin"
 import Cart from "./pages/Cart"

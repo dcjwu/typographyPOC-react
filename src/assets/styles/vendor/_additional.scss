@@ -9,15 +9,49 @@
 }
 
 .btn {
-  position: relative;
-  &-cart {
-    padding: 2rem;
+  &:hover,
+  &:focus {
+    background-color: rgba($blue, .9);
+    color: white;
   }
-  & .fa-shopping-cart {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+
+  &-cart {
+    color: $black;
+    transition: color .2s ease-in-out;
+    font-size: 2rem !important;
+
+    &:hover,
+    &:focus {
+      background-color: transparent;
+      color: $blue;
+    }
+
+    & span {
+      margin-left: .5rem;
+    }
+  }
+
+  &-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  &-custom {
+    padding: 0.5rem 1rem;
+    background-color: $blueLight;
+    color: white;
+  }
+  &-modal {
+    color: white;
+  }
+  &.success:hover,
+  &.success:focus{
+    background-color: rgba(#0a5b3c, .5);
+  }
+  &.error:hover,
+  &.error:focus {
+    background-color: rgba(#e71d4f, .5);
   }
 }
 
@@ -41,7 +75,8 @@
   position: absolute;
   top: $navbarHeight;
   right: 0;
-  width: 75%;
+  width: calc(100% - #{$sideBarWidth});
+  z-index: 9999;
   transition: all .2s ease-in-out;
   @include breakpoint($bp767) {
     width: 100%;
