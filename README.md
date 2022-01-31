@@ -14,9 +14,10 @@
 - Authentication through Firebase
 - User Roles
 - Filter Products from Firestore
-- Dynamic Pagination
+- Dynamic Routing
 - Send data to backend from Calculator to receive Price
 - Add Products to Cart
+- Add .pdf file to Order and save it to Google Drive
 - Create Order from Cart
 - Created order is visible in Admin Panel
 - Change and Filter orders by Status in Admin Panel
