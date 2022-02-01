@@ -11,7 +11,7 @@ const Button = ({
    return (
       <div className="btn-wrapper">
          <button {...otherProps}
-                 className={`btn btn-custom ${additionalClass ? ` ${additionalClass}` : ""}`}
+                 className={`btn btn-custom ${additionalClass ? `${additionalClass}` : ""}`}
                  type={type}
          >
             {children}

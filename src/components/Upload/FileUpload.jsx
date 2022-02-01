@@ -4,10 +4,11 @@ import axios from "axios"
 
 import Button from "../_UI/Button"
 import Modal from "../_UI/Modal"
+import Spinner from "../_UI/Spinner"
 import UploadProgress from "./UploadProgress"
 
-const FileUpload = ({ orderId }) => {
-   console.log(orderId)
+const FileUpload = ({ orderId, handleDesignUpload, handleDisabledButton }) => {
+   // console.log(orderId)
    const fileInput = useRef()
    const [showModal, setShowModal] = useState(false)
    const [uploadPercentage, setUploadPercentage] = useState(0)
@@ -17,8 +18,10 @@ const FileUpload = ({ orderId }) => {
    const [fileUploadError, setFileUploadError] = useState(null)
    const [fileValidationError, setFileValidationError] = useState(false)
 
-   const handleDesignRequired = () => {
-      setUploadDesign(prev => !prev)
+   const handleDesignRequired = async () => {
+      await setUploadDesign(prev => !prev)
+      handleDesignUpload(!uploadDesign)
+      handleDisabledButton(true)
    }
 
    const handleCloseModal = () => {
@@ -40,6 +43,7 @@ const FileUpload = ({ orderId }) => {
          .then(res => {
             if (res.status === 200) {
                setIsFileUploaded(true)
+               handleDisabledButton(false)
             } else {
                setFileUploadError("Unexpected Error")
             }
@@ -94,45 +98,46 @@ const FileUpload = ({ orderId }) => {
    }
 
    return (
-      <div className="mt-5">
-         <div className="form-check form-switch">
-            <input checked={uploadDesign} className="form-check-input"
-                   id="flexSwitchCheckDefault" role="switch" type="checkbox"
-                   onChange={handleDesignRequired}/>
-            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Upload Design</label>
+      <>
+         <div className="mt-5">
+            <div className="form-check form-switch">
+               <input checked={uploadDesign} className="form-check-input"
+                      id="flexSwitchCheckDefault" role="switch" type="checkbox"
+                      onChange={handleDesignRequired}/>
+               <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Upload Design</label>
+            </div>
+            {
+               uploadDesign && <>
+                  <div className="file">
+                     {
+                        fileValidationError && <Modal handleCloseModal={handleCloseModal} isError={true} showModal={showModal}
+                                                      top="10rem">
+                           Please, upload .pdf file
+                        </Modal>
+                     }
+                     {
+                        fileUploadError && <Modal handleCloseModal={handleCloseModal} isError={true} showModal={showModal}
+                                                  top="10rem">
+                           {fileUploadError}
+                        </Modal>
+                     }
+                     <label className={`btn btn-custom w-50 ${loading ? " disabled" : ""}`}>
+                        <input ref={fileInput} disabled={loading}
+                               name="pdf-file" type="file" onChange={handleFileUpload}/>
+                        <p>Upload your .pdf File</p>
+                     </label>
+                     <Button additionalClass={`error ${!isFileUploaded ? " disabled" : ""}`}
+                             onClick={() => handleFileDelete(orderId)}>
+                        Delete
+                     </Button>
+                  </div>
+                  <div className="upload-progress">
+                     <UploadProgress isError={fileUploadError} isFileUploaded={isFileUploaded} percentage={uploadPercentage}/>
+                  </div>
+               </>
+            }
          </div>
-         {
-            uploadDesign && <>
-               <div className="file">
-                  {
-                     fileValidationError && <Modal handleCloseModal={handleCloseModal} isError={true} showModal={showModal}
-                                                   top="5rem">
-                        Please, upload .pdf file
-                     </Modal>
-                  }
-                  {
-                     fileUploadError && <Modal handleCloseModal={handleCloseModal} isError={true} showModal={showModal}
-                                               top="5rem">
-                        {fileUploadError}
-                     </Modal>
-                  }
-                  <p>Please, upload <span className="text-primary">.pdf</span> design:</p>
-                  <label className={`btn btn-outline-primary ${loading ? " disabled" : ""}`}>
-                     <input ref={fileInput} disabled={loading}
-                            name="pdf-file" type="file" onChange={handleFileUpload}/>
-                     <p>Upload</p>
-                  </label>
-                  <Button additionalClass={`btn btn-outline-danger ${!isFileUploaded ? " disabled" : ""}`}
-                          onClick={() => handleFileDelete(orderId)}>
-                     Delete
-                  </Button>
-               </div>
-               <div className="upload-progress">
-                  <UploadProgress isError={fileUploadError} isFileUploaded={isFileUploaded} percentage={uploadPercentage}/>
-               </div>
-            </>
-         }
-      </div>
+      </>
    )
 }
 

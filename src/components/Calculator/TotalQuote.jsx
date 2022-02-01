@@ -68,7 +68,7 @@ const TotalQuote = ({
                </div>
             </div>
          </div>
-         <Button disabled={!(!!quantity && price !== 0)}
+         <Button additionalClass="success" disabled={!(!!quantity && price !== 0)}
                  onClick={handleAddToCart}>
             Add to Cart
          </Button>

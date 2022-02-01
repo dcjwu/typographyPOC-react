@@ -61,7 +61,8 @@ const LabelsCalculator = () => {
             setLoading(false)
             setCartProducts(prevState => ({
                ...prevState,
-               price
+               price,
+               productImage: productById.images[0]
             }))
          })
          .catch(() => {
@@ -123,11 +124,10 @@ const LabelsCalculator = () => {
 
    return (
       <div className="calc">
-
          {
             showModal
                ? <Modal handleCloseModal={handleCloseModal} isError={false} showModal={showModal}
-                        top="0">Product added to
+                        top="10rem">Product added to
                   cart!</Modal>
                : null
          }

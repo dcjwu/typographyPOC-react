@@ -2,53 +2,51 @@
 @import '../vendor/mixins';
 
 .cart {
-  margin-top: 3rem;
+  margin-top: 2rem;
+
+  &-wrapper-main {
+    font-family: $fontSourceSans;
+  }
 
   &-item {
     margin-bottom: 2rem;
-    padding: 1.5rem;
-    border-radius: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #f5f5f5;
-    position: relative;
+
     &:last-child {
       margin-bottom: 0;
     }
-    @include breakpoint($bp576) {
-      padding: 1rem;
+
+    & hr {
+      width: 100%;
+      height: 2px;
     }
 
-    & p {
-      @include breakpoint($bp576) {
-        font-size: 1.6rem;
-      }
-    }
-
-    & .text-danger {
-      @include breakpoint($bp576) {
-        font-size: 2.8rem;
-      }
-    }
-
-    &-name {
+    &-info {
       display: flex;
       align-items: center;
-      flex-direction: column;
-      gap: 2rem;
-      width: 30%;
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+      gap: 5rem;
+      width: 100%;
       @include breakpoint($bp576) {
-        flex-direction: column;
-        gap: 1rem;
-        width: 40%;
+        justify-content: space-between;
+      }
+      @include breakpoint($bp432) {
+        justify-content: center;
+        gap: 2rem;
       }
 
       & h5 {
+        margin: 0 0 1rem -1rem;
         font-size: 2rem;
+        font-weight: 600;
         @include breakpoint($bp576) {
           font-size: 1.8rem;
         }
+      }
+
+      & img {
+        width: 15rem;
+        height: 15rem;
       }
 
       & .details {
@@ -68,67 +66,63 @@
       }
     }
 
+    &-options {
+      width: 25%;
+      @include breakpoint($bp576) {
+        width: 40%;
+      }
+    }
+
     &-data {
+      padding: 2rem;
+      background-color: #f8f8f8;
+      border-top: 1px dotted #ccc;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      width: 65%;
+      font-size: 2.2rem;
+      font-weight: 300;
       @include breakpoint($bp576) {
-        flex-direction: column;
-        gap: 2rem;
-        width: 50%;
+        font-size: 1.8rem;
       }
-      & p {
-        font-size: 1.85rem;
-      }
-    }
 
-    & button {
-      border: none;
-      background: transparent;
-      font-size: 3rem;
-      transition: color .1s linear;
+      &-action {
+        display: flex;
+        align-items: center;
+        gap: 3rem;
 
-      &:hover,
-      &:focus {
-        color: $blue;
+        & button {
+          border: none;
+          background: transparent;
+          font-size: 3rem;
+          transition: color .1s linear;
+        }
       }
     }
   }
 
   &-total {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    & button {
+    margin-top: 1rem;
+    padding: 2rem;
+    background-color: #e4f2f6;
+    font-size: 2rem;
+    font-family: $fontSourceSans;
+    font-weight: 300;
+    @include breakpoint($bp576) {
+      font-size: 1.8rem;
+    }
+    &-sub, &-tot {
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px dotted #ccc;
+    }
+    &-tot {
       border: none;
-      background: transparent;
-    }
-
-    & > button {
-      padding: 1rem 2rem;
-      border-radius: 1rem;
-      background-color: #bdbdbd;
-      transition: all .2s linear;
-
-      &:hover, {
-      &:focus {
+      & p:last-child {
+        font-weight: 600;
       }
-        color: #bdbdbd;
-        background-color: black;
-      }
-    }
-  }
-
-  &-total {
-    margin-top: 2rem;
-    display: flex;
-    justify-content: center;
-    border-radius: 1rem;
-
-    & p {
-      font-size: 2.5rem;
     }
   }
 
@@ -137,6 +131,18 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+
+  &-empty {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    & img {
+      width: 80rem;
+      @include breakpoint($bp576) {
+        width: 60rem;
+      }
+    }
   }
 }
 

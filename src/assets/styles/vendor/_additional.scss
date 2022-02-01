@@ -11,7 +11,7 @@
 .btn {
   &:hover,
   &:focus {
-    background-color: rgba($blue, .9);
+    background-color: rgba($blueLight, 9);
     color: white;
   }
 
@@ -39,15 +39,21 @@
 
   &-custom {
     padding: 0.5rem 1rem;
-    background-color: $blueLight;
+    background-color: $blue;
     color: white;
+    &.success {
+      background-color: $green;
+    }
+    &.error {
+      background-color: $red;
+    }
   }
   &-modal {
     color: white;
   }
   &.success:hover,
   &.success:focus{
-    background-color: rgba(#0a5b3c, .5);
+    background-color: #48d29e;
   }
   &.error:hover,
   &.error:focus {
