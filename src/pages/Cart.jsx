@@ -11,10 +11,10 @@ import emptyCartImg from "../assets/images/emptycart.png"
 import Button from "../components/_UI/Button"
 import Modal from "../components/_UI/Modal"
 import Spinner from "../components/_UI/Spinner"
-import { prodServerUrl } from "../components/constants"
 import FileUpload from "../components/Upload/FileUpload"
 import { clearCart, removeProductFromCart } from "../redux/cart/cart.actions"
 import { clearOrder, createOrder } from "../redux/order/order.actions"
+import { prodServerUrl } from "../utils/constants"
 
 const Cart = () => {
    const [orderId, setOrderId] = useState(null)

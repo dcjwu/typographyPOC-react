@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from "react"
 
 import axios from "axios"
 
+import { prodServerUrl } from "../../utils/constants"
 import Button from "../_UI/Button"
 import Modal from "../_UI/Modal"
-import { prodServerUrl } from "../constants"
 import UploadProgress from "./UploadProgress"
 
 const FileUpload = ({ orderId, handleDesignUpload, handleDisabledButton, handleWaitingForServer }) => {
@@ -38,7 +38,7 @@ const FileUpload = ({ orderId, handleDesignUpload, handleDisabledButton, handleW
    }
 
    const uploadFile = async data => {
-      await axios.post(`${devServerUrl}/upload`, data, {
+      await axios.post(`${prodServerUrl}/upload`, data, {
          headers: { "Content-Type": "multipart/form-data" },
          signal: abortController.current.signal,
          onUploadProgress: progressEvent => {
