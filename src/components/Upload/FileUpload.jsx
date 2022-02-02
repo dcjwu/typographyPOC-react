@@ -1,15 +1,15 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 import axios from "axios"
 
 import Button from "../_UI/Button"
 import Modal from "../_UI/Modal"
-import Spinner from "../_UI/Spinner"
+import { prodServerUrl } from "../constants"
 import UploadProgress from "./UploadProgress"
 
-const FileUpload = ({ orderId, handleDesignUpload, handleDisabledButton }) => {
-   // console.log(orderId)
+const FileUpload = ({ orderId, handleDesignUpload, handleDisabledButton, handleWaitingForServer }) => {
    const fileInput = useRef()
+   const abortController = useRef(null)
    const [showModal, setShowModal] = useState(false)
    const [uploadPercentage, setUploadPercentage] = useState(0)
    const [uploadDesign, setUploadDesign] = useState(false)
@@ -17,6 +17,11 @@ const FileUpload = ({ orderId, handleDesignUpload, handleDisabledButton }) => {
    const [isFileUploaded, setIsFileUploaded] = useState(false)
    const [fileUploadError, setFileUploadError] = useState(null)
    const [fileValidationError, setFileValidationError] = useState(false)
+
+   useEffect(() => {
+      abortController.current = new AbortController()
+      return () => (abortController.current.abort())
+   }, [])
 
    const handleDesignRequired = async () => {
       await setUploadDesign(prev => !prev)
@@ -33,9 +38,11 @@ const FileUpload = ({ orderId, handleDesignUpload, handleDisabledButton }) => {
    }
 
    const uploadFile = async data => {
-      await axios.post("https://paper-demo-file-upload.herokuapp.com/upload", data, {
+      await axios.post(`${prodServerUrl}/upload`, data, {
          headers: { "Content-Type": "multipart/form-data" },
+         signal: abortController.current.signal,
          onUploadProgress: progressEvent => {
+            handleWaitingForServer(false)
             setLoading(true)
             setUploadPercentage(parseInt(Math.round((progressEvent.loaded * 100) / progressEvent.total)))
          }
@@ -53,10 +60,26 @@ const FileUpload = ({ orderId, handleDesignUpload, handleDisabledButton }) => {
                setFileUploadError(err.response.data)
             } else {
                setFileUploadError(err.message)
+               console.log("error")
             }
             setShowModal(true)
-            fileInput.current.value = ""
+            if (fileInput.current) {
+               fileInput.current.value = ""
+            }
          })
+   }
+
+   const cancelFileUpload = () => {
+      console.log("cancel file upload function")
+      abortController.current.abort()
+      abortController.current = new AbortController()
+      setFileUploadError(null)
+      setUploadPercentage(0)
+      setLoading(false)
+      setIsFileUploaded(false)
+      if (fileInput.current) {
+         fileInput.current.value = ""
+      }
    }
 
    const handleFileUpload = async e => {
@@ -66,6 +89,7 @@ const FileUpload = ({ orderId, handleDesignUpload, handleDisabledButton }) => {
          const formData = new FormData()
          formData.append("orderId", orderId)
          formData.append("pdf-file", currentFile)
+         handleWaitingForServer(true)
          await uploadFile(formData)
       } else {
          setFileValidationError(true)
@@ -75,7 +99,7 @@ const FileUpload = ({ orderId, handleDesignUpload, handleDisabledButton }) => {
    }
 
    const deleteFile = async data => {
-      await axios.post("https://paper-demo-file-upload.herokuapp.com/delete", data, { headers: { "Content-Type": "multipart/form-data" } })
+      await axios.post(`${prodServerUrl}/delete`, data, { headers: { "Content-Type": "multipart/form-data" } })
          .then(res => {
             if (res.status === 200) {
                setUploadPercentage(0)
@@ -121,14 +145,17 @@ const FileUpload = ({ orderId, handleDesignUpload, handleDisabledButton }) => {
                            {fileUploadError}
                         </Modal>
                      }
-                     <label className={`btn btn-custom w-50 ${loading ? " disabled" : ""}`}>
-                        <input ref={fileInput} disabled={loading}
+                     <label className={`btn btn-custom w-50 ${!!fileUploadError || loading ? " disabled" : ""}`}>
+                        <input ref={fileInput} disabled={!!fileUploadError || loading}
                                name="pdf-file" type="file" onChange={handleFileUpload}/>
                         <p>Upload your .pdf File</p>
                      </label>
                      <Button additionalClass={`error ${!isFileUploaded ? " disabled" : ""}`}
                              onClick={() => handleFileDelete(orderId)}>
                         Delete
+                     </Button>
+                     <Button additionalClass={`error ${!uploadPercentage || uploadPercentage === 100 ? " disabled" : ""}`} onClick={cancelFileUpload}>
+                        Cancel
                      </Button>
                   </div>
                   <div className="upload-progress">

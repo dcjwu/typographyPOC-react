@@ -10,7 +10,7 @@ const Modal = ({
 
    if (!showModal) return null
    else return (
-      <div className="modal-window d-flex flex-column justify-content-center"
+      <div className="modal-window d-flex flex-column justify-content-center text-capitalize"
            style={{ top: top }}>
          {
             !isError

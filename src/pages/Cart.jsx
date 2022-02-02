@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 
-
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import axios from "axios"
@@ -12,6 +11,7 @@ import emptyCartImg from "../assets/images/emptycart.png"
 import Button from "../components/_UI/Button"
 import Modal from "../components/_UI/Modal"
 import Spinner from "../components/_UI/Spinner"
+import { prodServerUrl } from "../components/constants"
 import FileUpload from "../components/Upload/FileUpload"
 import { clearCart, removeProductFromCart } from "../redux/cart/cart.actions"
 import { clearOrder, createOrder } from "../redux/order/order.actions"
@@ -75,18 +75,21 @@ const Cart = () => {
       setLoading(true)
       const formData = new FormData()
       formData.append("orderId", orderId)
-      axios.post("https://paper-demo-file-upload.herokuapp.com/save", formData, { headers: { "Content-Type": "multipart/form-data" } })
+      axios.post(`${prodServerUrl}/save`, formData, { headers: { "Content-Type": "multipart/form-data" } })
          .then(() => {
             setShowSuccessModal(true)
             setLoading(false)
             handleCreateOrder()
          })
          .catch(err => {
-            console.log("error")
             setUploadError(err.response.data)
             setShowErrorModal(true)
             setLoading(false)
          })
+   }
+
+   const handleWaitingForServer = loading => {
+      setLoading(loading)
    }
 
    return (
@@ -174,6 +177,7 @@ const Cart = () => {
                               }
                            </div>
                            <FileUpload handleDesignUpload={handleDesignUpload} handleDisabledButton={handleDisabledButton}
+                                       handleWaitingForServer={handleWaitingForServer}
                                        orderId={orderId}/>
                            <div className="cart-total">
                               <div className="cart-total-info">
@@ -186,8 +190,9 @@ const Cart = () => {
                                     <p>€0</p>
                                  </div>
                                  <div className="cart-total-tot">
-                                    <p>Order Total: ({cartProducts && cartProducts.length} {cartProducts.length > 1 ? "items" : "item"})</p>
-                                    <p>€{totalPrice.toFixed(2)} EUR</p>
+                                    <p>Order Total:
+                                       ({cartProducts && cartProducts.length} {cartProducts.length > 1 ? "items" : "item"})</p>
+                                    <p>€{totalPrice.toFixed(2)}</p>
                                  </div>
                               </div>
                            </div>
@@ -195,7 +200,8 @@ const Cart = () => {
                               <Button onClick={goBackToPreviousPage}>Go Back</Button>
                               {
                                  uploadDesign
-                                    ? <Button additionalClass={"success"} disabled={disableButtonStatus} onClick={() => saveFileToDrive(orderId)}>Create
+                                    ? <Button additionalClass={"success"} disabled={disableButtonStatus}
+                                              onClick={() => saveFileToDrive(orderId)}>Create
                                        Order</Button>
                                     : <Button additionalClass={"success"} onClick={handleCreateOrder}>Create Order</Button>
                               }

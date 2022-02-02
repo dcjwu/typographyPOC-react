@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
@@ -18,14 +18,14 @@ const LabelsCalculator = () => {
       calculator
    } = productById
 
-   const [markupType, setMarkupType] = useState("")
-   const [labelSizeX, setLabelSizeX] = useState("")
-   const [labelSizeY, setLabelSizeY] = useState("")
-   const [material, setMaterial] = useState("")
-   const [laminated, setLaminated] = useState("")
-   const [cutting, setCutting] = useState("")
-   const [rotation, setRotation] = useState("")
-   const [quantity, setQuantity] = useState("")
+   const [markupType, setMarkupType] = useState("0")
+   const [labelSizeX, setLabelSizeX] = useState("50")
+   const [labelSizeY, setLabelSizeY] = useState("50")
+   const [material, setMaterial] = useState("matt")
+   const [laminated, setLaminated] = useState("1")
+   const [cutting, setCutting] = useState("1")
+   const [rotation, setRotation] = useState("0")
+   const [quantity, setQuantity] = useState("20")
    const [price, setPrice] = useState(0)
    const [cartProduct, setCartProducts] = useState({})
 
@@ -73,8 +73,11 @@ const LabelsCalculator = () => {
          })
    }
 
-   const onSubmitForm = e => {
-      e.preventDefault()
+   useEffect(() => {
+      priceRequest()
+   }, [])
+
+   const priceRequest = () => {
       const validation = formValidation()
       if (validation) {
          const dataReadyToCheckPrice = {
@@ -97,6 +100,11 @@ const LabelsCalculator = () => {
          setCartProducts(dataReadyToCheckPrice)
          setLoading(true)
       }
+   }
+
+   const onSubmitForm = e => {
+      e.preventDefault()
+      priceRequest()
    }
 
    const onAddToCartDataReset = () => {
