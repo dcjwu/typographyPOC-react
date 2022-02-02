@@ -36,6 +36,9 @@
   font-family: $fontSourceSans;
   font-size: 2.5rem;
   text-transform: capitalize;
+  &.admin-title {
+    margin-bottom: 1.5rem;
+  }
 }
 
 .main {

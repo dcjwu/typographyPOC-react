@@ -19,8 +19,8 @@
 - Add Products to Cart
 - Add .pdf file to Order and save it to Google Drive
 - Create Order from Cart
-- Created order is visible in Admin Panel
-- Change and Filter orders by Status in Admin Panel
+- Created order is visible in AdminOrders Panel
+- Change and Filter orders by Status in AdminOrders Panel
 
 ---
 ### Status: ####

@@ -9,7 +9,6 @@ const Sidebar = ({
    toggleNavHandler,
    handleLogoutUser
 }) => {
-
    const outsideClickRef = useRef()
    useEffect(() => {
       const checkIfClickedOutside = event => {

@@ -5,9 +5,9 @@ import { Route, Switch } from "react-router-dom"
 
 import AdminRoute from "./components/_routes/AdminRoute"
 import PublicRoute from "./components/_routes/PublicRoute"
-import Banner from "./components/Banner"
 import Menu from "./components/Menu/Menu"
-import Admin from "./pages/Admin"
+import AdminOrders from "./pages/AdminOrders"
+import AdminUsers from "./pages/AdminUsers"
 import Cart from "./pages/Cart"
 import Home from "./pages/Home"
 import Login from "./pages/Login"
@@ -34,14 +34,16 @@ const App = () => {
             <Switch>
                <Route exact component={ProductPage} path="/shop/:category/:id"/>
                <Route exact component={ProductCategory} path="/shop/:category"/>
+               <AdminRoute exact auth={isAdmin} component={AdminOrders}
+                           path="/admin/orders"/>
+               <AdminRoute exact auth={isAdmin} component={AdminUsers}
+                           path="/admin/users"/>
                <PublicRoute exact auth={currentUser} component={Login}
                             path="/login"/>
                <Route exact component={Shop} path="/shop"/>
                <Route exact component={Cart} path="/cart"/>
-               <AdminRoute exact auth={isAdmin} component={Admin}
-                           path="/admin"/>
                <Route exact component={Home} path="/"/>
-               <Route component={Home} path="*"/>
+               <Route component={Home}/>
             </Switch>
          </div>
       </>

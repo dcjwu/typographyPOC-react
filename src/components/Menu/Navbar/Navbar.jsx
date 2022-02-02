@@ -33,7 +33,7 @@ const Navbar = ({
                {
                   !isAdmin
                      ? null
-                     : <NavLink className="link shop-link" to="/admin">Admin</NavLink>
+                     : <NavLink className="link shop-link" to="/admin/orders">Admin</NavLink>
                }
                {
                   !currentUser

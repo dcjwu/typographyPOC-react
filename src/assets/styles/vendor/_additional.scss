@@ -47,6 +47,15 @@
     &.error {
       background-color: $red;
     }
+    &.warning {
+      background-color: $yellow;
+    }
+    &.mid {
+      font-size: 1.6rem;
+    }
+    &.small {
+      font-size: 1.4rem;
+    }
   }
   &-modal {
     color: white;
@@ -58,6 +67,10 @@
   &.error:hover,
   &.error:focus {
     background-color: rgba(#e71d4f, .5);
+  }
+  &.warning:hover,
+  &.warning:focus {
+    background-color: #e1cb2c;
   }
 }
 
@@ -93,4 +106,16 @@
   z-index: 9999;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.text {
+  &-success {
+    color: $green;
+  }
+  &-error {
+    color: $red;
+  }
+  &-warning {
+    color: $yellow;
+  }
 }

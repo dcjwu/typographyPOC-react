@@ -22,48 +22,48 @@ const OrderData = ({ product }) => {
          }), {})
    }
 
-   let dataFromKey = []
-   let dataFromValue = []
+   let dataKey = []
+   let dataValue = []
    for (const [key, value] of Object.entries(sortObjects(otherData))) {
-      dataFromKey.push(key)
-      dataFromValue.push(value)
+      dataKey.push(key)
+      dataValue.push(value)
    }
 
    return (
-      <div className="order-item">
-         <div className="order-item-wrapper header">
-            <div className="orders-item-keys">
+      <>
+         <div className="order-details-top">
+            <div className="order-details-top-left">
                <p>Title:</p>
                <p>Type:</p>
                <p>Quantity:</p>
                <p>Markup:</p>
                <p>Price:</p>
             </div>
-            <div className="orders-item-values">
+            <div className="order-details-top-right">
                <p>{title}</p>
                <p>{productType}</p>
                <p>{quantity}</p>
                <p>{markupType}</p>
-               <p>{price.toFixed(2)}</p>
+               <p>€{price}</p>
             </div>
          </div>
-         <div className="order-item-wrapper">
-            <div className="orders-item-keys">
+         <div className="order-details-bottom">
+            <div className="order-details-bottom-left">
                {
-                  dataFromKey.map(item => (
-                     <p key={uuidv4()}>{item}:</p>
+                  dataKey.map(item => (
+                     <p key={uuidv4()}>{item}</p>
                   ))
                }
             </div>
-            <div className="orders-item-values">
+            <div className="order-details-bottom-right">
                {
-                  dataFromValue.map(item => (
+                  dataValue.map(item => (
                      <p key={uuidv4()}>{item}</p>
                   ))
                }
             </div>
          </div>
-      </div>
+      </>
    )
 }
 

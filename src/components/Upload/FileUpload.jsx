@@ -38,7 +38,7 @@ const FileUpload = ({ orderId, handleDesignUpload, handleDisabledButton, handleW
    }
 
    const uploadFile = async data => {
-      await axios.post(`${prodServerUrl}/upload`, data, {
+      await axios.post(`${devServerUrl}/upload`, data, {
          headers: { "Content-Type": "multipart/form-data" },
          signal: abortController.current.signal,
          onUploadProgress: progressEvent => {

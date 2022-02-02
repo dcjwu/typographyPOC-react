@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react"
 
 import { useDispatch } from "react-redux"
-import { useHistory } from "react-router-dom"
+import { useHistory, useLocation } from "react-router-dom"
 
 import { userLogout } from "../../redux/auth/auth.actions"
 import { clearCart } from "../../redux/cart/cart.actions"
@@ -29,12 +29,12 @@ const Menu = () => {
    return (
       <>
          <Navbar handleLogoutUser={handleLogoutUser}
-            toggleNavHandler={setToggleNav}
-            toggleNavStatus={toggleNav}
+                 toggleNavHandler={setToggleNav}
+                 toggleNavStatus={toggleNav}
          />
          <Sidebar handleLogoutUser={handleLogoutUser}
-            toggleNavHandler={setToggleNav}
-            toggleNavStatus={toggleNav}
+                  toggleNavHandler={setToggleNav}
+                  toggleNavStatus={toggleNav}
          />
       </>
    )

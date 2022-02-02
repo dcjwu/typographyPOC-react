@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux"
-import { NavLink } from "react-router-dom"
+import { NavLink, useLocation } from "react-router-dom"
 
+import AdminSidebarList from "./AdminSidebarList"
 import CategoryList from "./CategoryList"
 
 const SidebarLinks = ({
@@ -12,6 +13,7 @@ const SidebarLinks = ({
       isAdmin
    } = useSelector(({ auth }) => auth)
    const toggleNavOnClick = () => handleClickInside()
+   const location = useLocation()
 
    return (
       <>
@@ -25,7 +27,7 @@ const SidebarLinks = ({
                !isAdmin
                   ? null
                   : <NavLink className="link shop-link"
-                             to="/admin"
+                             to="/admin/orders"
                              onClick={toggleNavOnClick}>Admin</NavLink>
             }
             {
@@ -39,8 +41,17 @@ const SidebarLinks = ({
                           onClick={handleLogoutUser}>Logout</span>
             }
          </div>
-         <h2>Products</h2>
-         <CategoryList handleClickInside={handleClickInside}/>
+         {
+            location.pathname.includes("admin")
+               ? <>
+                  <h2>Admin Panel</h2>
+                  <AdminSidebarList handleClickInside={handleClickInside}/>
+               </>
+               : <>
+                  <h2>Products</h2>
+                  <CategoryList handleClickInside={handleClickInside}/>
+               </>
+         }
       </>
    )
 }
