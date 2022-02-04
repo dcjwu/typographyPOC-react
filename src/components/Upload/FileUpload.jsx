@@ -60,7 +60,6 @@ const FileUpload = ({ orderId, handleDesignUpload, handleDisabledButton, handleW
                setFileUploadError(err.response.data)
             } else {
                setFileUploadError(err.message)
-               console.log("error")
             }
             setShowModal(true)
             if (fileInput.current) {
@@ -70,7 +69,6 @@ const FileUpload = ({ orderId, handleDesignUpload, handleDisabledButton, handleW
    }
 
    const cancelFileUpload = () => {
-      console.log("cancel file upload function")
       abortController.current.abort()
       abortController.current = new AbortController()
       setFileUploadError(null)

@@ -166,3 +166,9 @@ small {
   }
 }
 
+.fixed-spinner {
+  position: fixed;
+  z-index: 99999;
+  left: 50%;
+}
+

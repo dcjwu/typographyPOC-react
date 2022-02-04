@@ -148,7 +148,7 @@ const LabelsCalculator = () => {
          <form onSubmit={onSubmitForm}>
             <div className="calc-markup">
                <h2>Please, choose markup:</h2>
-               <select disabled={loading} value={markupType} onChange={onMarkupTypeChange}>
+               <select /*disabled={loading}*/ value={markupType} onChange={onMarkupTypeChange}>
                   <option disabled hidden value="">- Choose -</option>
                   <option value="0">0</option>
                   <option value="1">1</option>
@@ -160,10 +160,10 @@ const LabelsCalculator = () => {
                   Label Size (mm):
                </div>
                <div className="calc-row-option--input">
-                  <input disabled={loading} min={10} placeholder="X"
+                  <input /*disabled={loading}*/ min={10} placeholder="X"
                          type="number"
                          value={labelSizeX} onChange={onLabelSizeXChange}/>
-                  <input disabled={loading} min={10} placeholder="Y"
+                  <input /*disabled={loading}*/ min={10} placeholder="Y"
                          type="number"
                          value={labelSizeY} onChange={onLabelSizeYChange}/>
                </div>
@@ -173,7 +173,7 @@ const LabelsCalculator = () => {
                   Material:
                </div>
                <div className="calc-row-option--select">
-                  <select disabled={loading} value={material} onChange={onMaterialChange}>
+                  <select /*disabled={loading}*/ value={material} onChange={onMaterialChange}>
                      <option disabled hidden value="">- Choose -</option>
                      <option value="film">Film</option>
                      <option value="gloss">Gloss</option>
@@ -187,7 +187,7 @@ const LabelsCalculator = () => {
                   Laminated:
                </div>
                <div className="calc-row-option--select">
-                  <select disabled={loading} value={laminated} onChange={onLaminatedChange}>
+                  <select /*disabled={loading}*/ value={laminated} onChange={onLaminatedChange}>
                      <option disabled hidden value="">- Choose -</option>
                      <option value="0">No</option>
                      <option value="1">Yes</option>
@@ -199,7 +199,7 @@ const LabelsCalculator = () => {
                   Cutting:
                </div>
                <div className="calc-row-option--select">
-                  <select disabled={loading} value={cutting} onChange={onCuttingChange}>
+                  <select /*disabled={loading}*/ value={cutting} onChange={onCuttingChange}>
                      <option disabled hidden value="">- Choose -</option>
                      <option value="0">No</option>
                      <option value="1">Yes</option>
@@ -211,7 +211,7 @@ const LabelsCalculator = () => {
                   Rotation:
                </div>
                <div className="calc-row-option--select">
-                  <select disabled={loading} value={rotation} onChange={onRotationChange}>
+                  <select /*disabled={loading}*/ value={rotation} onChange={onRotationChange}>
                      <option disabled hidden value="">- Choose -</option>
                      <option value="0">No</option>
                      <option value="1">Yes</option>
@@ -223,7 +223,7 @@ const LabelsCalculator = () => {
                   Quantity:
                </div>
                <div className="calc-row-option--input--q">
-                  <input disabled={loading} min={1} placeholder={"Quantity"}
+                  <input /*disabled={loading}*/ min={1} placeholder={"Quantity"}
                          type="number"
                          value={quantity} onChange={onQuantityChange}/>
                </div>

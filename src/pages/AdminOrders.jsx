@@ -11,6 +11,7 @@ const filterButtons = ["in progress", "completed", "canceled", "show all"]
 
 const AdminOrders = () => {
 
+
    const dispatch = useDispatch()
    const {
       orderListFromDb,
@@ -50,13 +51,13 @@ const AdminOrders = () => {
                            {
                               filterButtons.map(button => {
                                  if (button === "in progress") return <Button key={button}
-                                                                              additionalClass="text-capitalize warning mid"
+                                                                              additionalClass="text-capitalize mid"
                                                                               onClick={() => handleFilteredProducts(button)}>{button}</Button>
                                  if (button === "completed") return <Button key={button}
-                                                                            additionalClass="text-capitalize success mid"
+                                                                            additionalClass="text-capitalize mid"
                                                                             onClick={() => handleFilteredProducts(button)}>{button}</Button>
                                  if (button === "canceled") return <Button key={button}
-                                                                           additionalClass="text-capitalize error mid"
+                                                                           additionalClass="text-capitalize mid"
                                                                            onClick={() => handleFilteredProducts(button)}>{button}</Button>
                                  if (button === "show all") return <Button key={button}
                                                                            additionalClass="text-capitalize mid"
@@ -65,6 +66,13 @@ const AdminOrders = () => {
                            }
                         </div>
                         <div className="admin-data">
+                           <div className="admin-info">
+                              <p className="order-id">Order ID</p>
+                              <p className="order-user">User</p>
+                              <p className="order-price">Price</p>
+                              <p className="order-date">Date</p>
+                              <p className="order-status-text">Status</p>
+                           </div>
                            {
                               orderListFromDb.map((order, index) => (
                                  <Order key={order.orderId} index={index} order={order}/>

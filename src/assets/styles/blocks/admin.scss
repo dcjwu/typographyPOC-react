@@ -20,10 +20,9 @@
   &-data {
     font-size: 1.5rem;
     &-order {
-      padding: 2rem 1rem;
+      padding: 2rem .5rem;
       display: flex;
       align-items: center;
-      justify-content: space-between;
       border-top: 2px solid $black;
       @include breakpoint($bp1035) {
         gap: 1rem;
@@ -39,6 +38,17 @@
     padding: 1rem 1rem 0 1rem;
     background-color: #f3f3f3;
     border: 1px solid black;
+  }
+  &-info {
+    padding: 1rem .5rem;
+    display: flex;
+    align-items: center;
+    background-color: #e0e0e0;
+    border-top: 1px solid black;
+    font-weight: 600;
+    @include breakpoint($bp1035) {
+      display: none;
+    }
   }
 }
 
@@ -86,6 +96,46 @@
       &-right {
         text-align: right;
       }
+    }
+  }
+  &-id {
+    width: 32%;
+    @include breakpoint($bp1035) {
+      width: initial;
+    }
+  }
+  &-user {
+    text-align: center;
+    width: 20%;
+    @include breakpoint($bp1035) {
+      width: initial;
+    }
+  }
+  &-price {
+    text-align: center;
+    width: 13%;
+    @include breakpoint($bp1035) {
+      width: initial;
+    }
+  }
+  &-date {
+    text-align: center;
+    width: 15%;
+    @include breakpoint($bp1035) {
+      width: initial;
+    }
+  }
+  &-status-text {
+    text-align: center;
+    width: 13%;
+    @include breakpoint($bp1035) {
+      width: initial;
+    }
+  }
+  &-btn {
+    width: 10%;
+    @include breakpoint($bp1035) {
+      width: initial;
     }
   }
 }

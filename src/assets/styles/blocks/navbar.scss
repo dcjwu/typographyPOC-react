@@ -78,10 +78,17 @@
     }
   }
   &-right {
-    width: 50%;
+    font-size: 1.8rem;
+    width: 30%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @include breakpoint($bp1035) {
+      width: 35%;
+    }
+    @include breakpoint($bp991) {
+      width: 45%;
+    }
     @include breakpoint($bp767) {
       width: initial;
     }

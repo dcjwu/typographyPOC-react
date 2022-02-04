@@ -63,7 +63,7 @@ const Cart = () => {
    const handleCreateOrder = () => {
       const timestamp = Date.now()
       const status = "in progress"
-      dispatch(createOrder(cart, timestamp, orderId, currentUser, status))
+      dispatch(createOrder(cart, timestamp, orderId, currentUser, status, uploadDesign))
       setShowSuccessModal(true)
       if (!showSuccessModal) {
          dispatch(clearCart())
@@ -94,13 +94,6 @@ const Cart = () => {
 
    return (
       <>
-         {
-            loading
-               ? <div className="container-content">
-                  <Spinner absolute={true} height={400} width={400}/>
-               </div>
-               : null
-         }
          {
             showErrorModal && !loading
                ? <div className="container-content">
@@ -180,6 +173,13 @@ const Cart = () => {
                                        handleWaitingForServer={handleWaitingForServer}
                                        orderId={orderId}/>
                            <div className="cart-total">
+                              {
+                                 loading
+                                    ? <div className="container-content">
+                                       <Spinner absolute={true} height={400} width={400}/>
+                                    </div>
+                                    : null
+                              }
                               <div className="cart-total-info">
                                  <div className="cart-total-sub">
                                     <p>Item Subtotal:</p>

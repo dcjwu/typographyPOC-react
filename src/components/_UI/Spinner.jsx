@@ -6,7 +6,7 @@ const Spinner = ({
    absolute
 }) => {
    return (
-      <div className={`d-flex justify-content-center ${absolute ? "position-absolute" : ""}`}>
+      <div className={`d-flex justify-content-center ${absolute ? "position-absolute" : ""}`} style={absolute ? { top: "-105px" } : null}>
          <svg enableBackground="new 0 0 0 0"
               id="L9" style={{
                  width: width === undefined ? 200 : width,

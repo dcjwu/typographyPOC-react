@@ -10,12 +10,12 @@ import "./assets/styles/main.scss"
 import store from "./redux/store"
 
 ReactDOM.render(
-   <React.StrictMode>
-      <HashRouter>
-         <Provider store={store}>
-            <App/>
-         </Provider>
-      </HashRouter>
-   </React.StrictMode>,
+   // <React.StrictMode>
+   <HashRouter>
+      <Provider store={store}>
+         <App/>
+      </Provider>
+   </HashRouter>,
+   // </React.StrictMode>,
    document.getElementById("root")
 )

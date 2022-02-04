@@ -1,7 +1,7 @@
 import { firestore } from "../../firebase/utils"
 import orderTypes from "./order.types"
 
-export const createOrder = (currentProducts, timestamp, id, email, status) => async dispatch => {
+export const createOrder = (currentProducts, timestamp, id, email, status, uploadDesign) => async dispatch => {
    await firestore
       .collection("orders")
       .doc()
@@ -10,7 +10,8 @@ export const createOrder = (currentProducts, timestamp, id, email, status) => as
          dateCreated: timestamp,
          orderId: id,
          customerEmail: email,
-         orderStatus: status
+         orderStatus: status,
+         design: uploadDesign
       })
       .then(dispatch(setCreateOrder(currentProducts)))
 }
@@ -46,15 +47,25 @@ const setOrdersFromDB = orders => ({
    payload: orders
 })
 
-export const findCollectionId = (id, status) => async dispatch => {
+export const findCollectionId = (id, status, link) => async dispatch => {
    await firestore.collection("orders").where("orderId", "==", id)
       .get()
       .then(data => data.docs.forEach(currentDoc => {
-         updateCollectionOrderStatus(currentDoc.id, status)
-            .then(dispatch(getOrdersFromDB()))
+         if (status === null) {
+            updateCollectionDesignLink(currentDoc.id, link)
+               .then(dispatch(getOrdersFromDB()))
+         }
+         if (link === null) {
+            updateCollectionOrderStatus(currentDoc.id, status)
+               .then(dispatch(getOrdersFromDB()))
+         }
       }))
 }
 
 const updateCollectionOrderStatus = async (collectionId, status) => {
    await firestore.collection("orders").doc(collectionId).update({ "orderStatus": status })
+}
+
+const updateCollectionDesignLink = async (collectionId, link) => {
+   await firestore.collection("orders").doc(collectionId).update({ "designLink": link })
 }
