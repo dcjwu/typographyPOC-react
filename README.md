@@ -1,5 +1,4 @@
-# [Demo](https://demo-typography-web.herokuapp.com/#/) Web App for Typography #
->_Preview of this project is deployed on Heroku and takes about 40s to be loaded for the first time._
+# Demo Web App for Typography #
 #### January 2022 ####
 ---
 ## My first experience using Redux and Firebase. ##
@@ -12,17 +11,16 @@
 
 #### Description: ####
 - Authentication through Firebase
-- User Roles
-- Filter Products from Firestore
-- Dynamic Routing
-- Send data to backend from Calculator to receive Price
-- Add Products to Cart
-- Add .pdf file to Order and save it to Google Drive
-- Create Order from Cart
-- Created order is visible in AdminOrders Panel
-- Change and Filter orders by Status in AdminOrders Panel
+- User roles
+- Filter products from Firestore
+- Dynamic routing
+- Send data to backend from calculator to receive price
+- Add products to cart
+- Create order from cart
+- View to check file upload
+- Created order is visible in Admin Panel
+- Change and filter orders by Status in Admin Panel
 
 ---
 ### Status: ####
-- _98% finished._
-- _2%_ == _Possible minor fixes._
+_Project is finished._
