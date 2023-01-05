@@ -1,4 +1,3 @@
-#### Context:
 __January 2022.__ Development of POC for typography business. Additionally, per the client's request, it has a service to handle file uploads [here](https://github.com/dcjwu/typographyPOC-express).
 
 #### Description:
