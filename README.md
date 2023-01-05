@@ -1,5 +1,5 @@
 #### Context:
-__January 2022.__ Development of POC for typography business online store. Additionaly, per client's request it has a service to handle file uploads [here](https://github.com/dcjwu/typographyPOC-express).
+__January 2022.__ Development of POC for typography business. Additionally, per the client's request, it has a service to handle file uploads [here](https://github.com/dcjwu/typographyPOC-express).
 
 #### Description:
 - Authentication through Firebase
@@ -13,10 +13,4 @@ __January 2022.__ Development of POC for typography business online store. Addit
 - Orders are visible in Admin Panel
 - Change and filter orders by status in Admin Panel
 
-#### Technologies used:
-- React
-- Redux, Redux-Thunk
-- Firebase
-
-#### Status:
-POC is finished.
+#### Status — FINISHED.
